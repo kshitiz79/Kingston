@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Geist', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-mono: 'Geist Mono', monospace;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+  }
+
+  body {
+    background-color: #080711;
+    color: #edeaf8;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom utility & animation classes */
+.font-serif-instrument {
+  font-family: 'Instrument Serif', Georgia, serif;
+}
+
+.font-geist-mono {
+  font-family: 'Geist Mono', monospace;
+}
+
+.font-geist {
+  font-family: 'Geist', sans-serif;
+}
+
+/* Glassmorphism styling */
+.glass-panel {
+  background: rgba(17, 14, 34, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(190, 170, 255, 0.14);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(24, 20, 48, 0.85);
+  border-color: rgba(190, 170, 255, 0.28);
+  box-shadow: 0 12px 30px -10px rgba(124, 92, 255, 0.2);
+}
+
+/* Subtle grid background */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(190, 170, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(190, 170, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Custom glow effect */
+.glow-lavender {
+  box-shadow: 0 0 40px -10px rgba(167, 139, 250, 0.35);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 35px -8px rgba(45, 212, 191, 0.3);
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #080711;
+}
+::-webkit-scrollbar-thumb {
+  background: #252044;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3675;
+}
+
+/* ECG Waveform Animation */
+@keyframes ecgScanFast {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-120px);
+  }
+}
+
+@keyframes ecgScanNormal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-120px);
+  }
+}
+
+.animate-ecg-active {
+  animation: ecgScanFast 0.85s linear infinite;
+}
+
+.animate-ecg-idle {
+  animation: ecgScanNormal 2.4s linear infinite;
+}
+
+.ecg-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}

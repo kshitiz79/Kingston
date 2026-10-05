@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kingston Instruments – Home health monitoring (concept 4)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F8F5EF; --surface:#FFFFFF; --ink:#1D1445; --muted:#675F85; --line:rgba(29,20,69,.12);
+  --uv:#6A4DFF; --deep:#2A1B75; --stage:#ECE7FF; --sand:#EADFCB; --lav:#E3DCFF;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif; --sans:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(20px,5vw,64px);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#0F0B24;--surface:#1A1540;--ink:#F1EEFF;--muted:#A29BC6;--line:rgba(241,238,255,.14);--uv:#9A85FF;--stage:#1B1544}
+}
+:root[data-theme="dark"]{--bg:#0F0B24;--surface:#1A1540;--ink:#F1EEFF;--muted:#A29BC6;--line:rgba(241,238,255,.14);--uv:#9A85FF;--stage:#1B1544}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--uv);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+
+header{position:relative;z-index:10}
+.nav{display:flex;align-items:center;gap:28px;height:84px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand b{font:700 1rem var(--sans);letter-spacing:.22em}
+.brand small{font-size:.74rem;color:var(--muted);padding-left:14px;border-left:1px solid var(--line)}
+.links{display:flex;gap:28px;margin:0 auto;padding:0;list-style:none}
+.links a{text-decoration:none;font-size:.94rem;color:var(--muted);transition:color .2s}
+.links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;border-radius:999px;font:600 .94rem var(--sans);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .15s,background .2s,border-color .2s}
+.btn:active{transform:scale(.98)}
+.btn.sm{min-height:40px;padding:0 20px;font-size:.9rem}
+.btn.primary,.btn.mint{background:var(--deep);color:#fff}
+.btn.primary:hover,.btn.mint:hover{background:var(--uv)}
+.btn.ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn.ghost:hover{border-color:var(--uv)}
+.menu-btn{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);place-items:center;cursor:pointer}
+.menu-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round}
+
+.hero{text-align:center;padding-top:clamp(24px,5vw,56px)}
+h1{font:400 clamp(3.4rem,10.5vw,9rem)/.9 var(--serif);letter-spacing:-.025em;margin:0 auto 20px;max-width:10em}
+.lede{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--muted);max-width:30em;margin:0 auto 28px}
+.lede b{color:var(--ink);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:clamp(32px,5vw,56px)}
+
+.stage{background:var(--stage);border-radius:clamp(28px,4vw,48px);padding:clamp(28px,4vw,56px) clamp(16px,3vw,48px) clamp(24px,3vw,40px);text-align:center}
+.devices{display:grid;grid-template-columns:1fr 1.32fr 1fr;gap:clamp(12px,3vw,44px);align-items:end}
+.dev{margin:0}
+.callout{display:flex;flex-direction:column;align-items:center;font:700 .9rem var(--sans);letter-spacing:.06em;color:var(--uv)}
+.callout::after{content:"";width:1px;height:30px;background:var(--uv);margin:8px 0 6px;opacity:.6}
+.dev svg{width:100%;height:auto;display:block;overflow:visible}
+.dev svg .on{opacity:1}
+.dev svg .off{opacity:.08}
+.dev figcaption{margin-top:10px}
+.dev figcaption b{display:block;font:400 1.5rem var(--serif);letter-spacing:-.01em}
+.dev figcaption span{display:block;font-size:.9rem;color:var(--muted);max-width:19em;margin:2px auto 10px}
+.meas{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:999px;font:600 .82rem var(--sans);padding:8px 18px;cursor:pointer;transition:background .2s,border-color .2s}
+.meas:hover{border-color:var(--uv);background:var(--surface)}
+
+.sec{padding-top:clamp(64px,9vw,128px)}
+h2{font:400 clamp(2.4rem,5.4vw,4.4rem)/.98 var(--serif);letter-spacing:-.02em;margin:0}
+
+/* tools */
+.band-head{margin-bottom:36px}
+.band-head h2{margin-bottom:14px}
+.band-head p{margin:0;color:var(--muted);max-width:34em}
+.tool-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr);gap:clamp(20px,4vw,56px);align-items:start}
+.tabs{display:flex;flex-direction:column;gap:6px}
+.tab{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;background:transparent;border:1px solid transparent;border-radius:20px;padding:16px 18px;color:var(--ink);cursor:pointer;font:inherit;transition:background .2s,border-color .2s}
+.tab:hover{background:var(--surface)}
+.tab[aria-selected="true"]{background:var(--surface);border-color:var(--line)}
+.tab svg{width:26px;height:26px;flex:none;stroke:var(--uv);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.tab b{display:block;font:600 1.02rem var(--sans)}
+.tab span{color:var(--muted);font-size:.92rem}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:32px;padding:clamp(20px,3.5vw,36px);min-height:340px}
+.panel[hidden],.fields[hidden]{display:none}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px;margin-bottom:18px}
+label.f{display:block;font-size:.82rem;color:var(--muted)}
+label.f input{display:block;width:100%;margin-top:6px;height:54px;border-radius:16px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:500 1.15rem var(--sans);padding:0 16px}
+label.f input:focus-visible{outline:2px solid var(--uv);outline-offset:2px}
+.seg2{display:inline-flex;padding:3px;border-radius:999px;border:1px solid var(--line);margin-bottom:18px}
+.seg2 button{border:0;background:transparent;color:var(--muted);font:600 .85rem var(--sans);height:32px;padding:0 16px;border-radius:999px;cursor:pointer}
+.seg2 button[aria-pressed="true"]{background:var(--deep);color:#fff}
+.big-num{font:400 clamp(3.2rem,8vw,5rem)/1 var(--serif);letter-spacing:-.02em}
+.big-num small{font:500 .88rem var(--sans);color:var(--muted);letter-spacing:0;margin-left:10px}
+.verdict{color:var(--uv);font-weight:600;margin:8px 0 16px}
+.scale{position:relative;height:6px;border-radius:99px;background:linear-gradient(90deg,#4B7BA6 0 14%,#2FBF9C 14% 40%,#E0B93C 40% 60%,#E0772E 60% 100%)}
+.scale i{position:absolute;top:-6px;width:4px;height:18px;border-radius:2px;background:var(--ink);transition:left .3s}
+.hint{font-size:.82rem;color:var(--muted);margin:16px 0 0}
+.err{color:#C93A2E;font-size:.88rem;min-height:1.3em;margin:0 0 8px}
+.log{list-style:none;margin:14px 0 0;padding:0;max-height:200px;overflow:auto}
+.log li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.log b{font:600 1.05rem var(--sans)}
+.log span{color:var(--muted);font-size:.85rem}
+.log button{background:transparent;border:0;color:var(--muted);cursor:pointer;font:inherit;font-size:.85rem;padding:6px}
+.chart{width:100%;height:auto;display:block;margin-top:14px}
+.legend{display:flex;gap:16px;font-size:.82rem;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.row-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* range blocks */
+.blocks{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;margin-top:clamp(28px,4vw,48px)}
+.block{border-radius:32px;padding:clamp(24px,3vw,36px);min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
+.block h3{font:400 clamp(2rem,3.6vw,3rem)/1 var(--serif);letter-spacing:-.02em;margin:0 0 12px}
+.block p{margin:0;max-width:20em}
+.b1{background:var(--deep);color:#fff}
+.b1 p{color:#CFC6FF}
+.b2{background:var(--lav);color:#1D1445}
+.b3{background:var(--sand);color:#1D1445}
+.b2 p,.b3 p{color:#4C4470}
+.block .go{align-self:flex-start;background:#fff;color:var(--deep);text-decoration:none;font-weight:600;border-radius:999px;padding:12px 22px}
+.block .tag{align-self:flex-start;border:1px solid rgba(29,20,69,.3);border-radius:999px;padding:8px 16px;font-size:.88rem;font-weight:600}
+
+.dealer{margin-top:clamp(64px,9vw,128px);background:var(--deep);color:#fff;padding:clamp(56px,8vw,104px) 0}
+.dealer-in{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:center}
+.dealer h2{color:#fff;margin-bottom:12px}
+.dealer p{margin:0;color:#CFC6FF}
+.dealer .btn{background:#F8F5EF;color:var(--deep)}
+.dealer .btn:hover{background:#fff}
+footer{padding:32px 0 44px;color:var(--muted);font-size:.88rem}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px}
+.foot nav{display:flex;gap:24px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--ink)}
+.note{margin-top:16px;font-size:.82rem;max-width:56em}
+
+@media (max-width:900px){
+  .links{display:none;position:absolute;left:0;right:0;top:78px;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:8px 22px;box-shadow:0 24px 50px -24px rgba(29,20,69,.35)}
+  .links.open{display:flex}
+  .links a{display:block;padding:14px 0;font-size:1.05rem;color:var(--ink)}
+  .links li+li{border-top:1px solid var(--line)}
+  .menu-btn{display:grid;margin-left:auto}
+  .nav{gap:12px}.nav>.btn{display:none}
+  .brand small{display:none}
+  .devices{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:20px;padding:0 10% 12px;margin:0 calc(-1*clamp(16px,3vw,48px))}
+  .dev{flex:0 0 78%;scroll-snap-align:center}
+  .tool-grid{grid-template-columns:1fr}
+  .tabs{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:4px}
+  .tab{width:auto;flex:none;padding:12px 16px;align-items:center}
+  .tab span{display:none}
+  .blocks{grid-template-columns:1fr}
+  .block{min-height:240px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#" aria-label="Kingston Instruments home"><b>KINGSTON</b><small>Proudly Canadian</small></a>
+    <ul class="links" id="links">
+      <li><a href="#devices">Products</a></li>
+      <li><a href="#">Technology</a></li>
+      <li><a href="#">Health insights</a></li>
+      <li><a href="#tools">Health tools</a></li>
+      <li><a href="#">Support</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a class="btn ghost sm" href="#dealer">Find a dealer</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="links"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg></button>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero" id="devices">
+    <h1>Precision with care.</h1>
+    <p class="lede"><b>Know your numbers. Own your health.</b> Intelligent monitoring for everyday confidence.</p>
+    <div class="cta">
+      <a class="btn primary" href="#range">Explore the range</a>
+      <a class="btn ghost" href="#dealer">Find your monitor</a>
+    </div>
+
+    <div class="stage">
+      <div class="devices">
+
+        <figure class="dev" data-m="a1">
+          <div class="callout">A1</div>
+          <svg viewBox="0 0 300 290" role="img" aria-label="Kingston A1 blood pressure monitor">
+            <defs>
+              <linearGradient id="sh1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E7E6E2"/></linearGradient>
+              <radialGradient id="gr1"><stop offset="0" stop-color="#1D1445" stop-opacity=".22"/><stop offset="1" stop-color="#1D1445" stop-opacity="0"/></radialGradient>
+            </defs>
+            <ellipse cx="150" cy="274" rx="120" ry="12" fill="url(#gr1)"/>
+            <rect x="20" y="16" width="260" height="248" rx="36" fill="url(#sh1)"/>
+            <text x="150" y="40" text-anchor="middle" font-size="9" letter-spacing="3" fill="#8A8A94" font-family="Hanken Grotesk,Arial,sans-serif" font-weight="600">KINGSTON</text>
+            <rect x="44" y="52" width="212" height="132" rx="12" fill="#C6D1AE"/>
+            <rect x="44.5" y="52.5" width="211" height="131" rx="11.5" fill="none" stroke="#9FAB86"/>
+            <text x="54" y="68" font-size="8" fill="#3A4630" font-family="monospace">TIME 10:10</text>
+            <g id="a1-sys"></g><g id="a1-dia"></g><g id="a1-pul"></g>
+            <g font-size="8" fill="#3A4630" font-family="monospace"><text x="208" y="100">SYS</text><text x="208" y="138">DIA</text><text x="208" y="168">PULSE</text></g>
+            <g font-size="8" font-weight="600" fill="#6C6C76" font-family="Hanken Grotesk,Arial,sans-serif" text-anchor="middle">
+              <rect x="44" y="204" width="60" height="32" rx="16" fill="#E3E2DE"/><text x="74" y="224">MEM</text>
+              <rect x="112" y="204" width="76" height="32" rx="16" fill="#E3E2DE"/><text x="150" y="224">START/STOP</text>
+              <rect x="196" y="204" width="60" height="32" rx="16" fill="#E3E2DE"/><text x="226" y="224">SET</text>
+            </g>
+          </svg>
+          <figcaption><b>A1</b><span>LCD display with time, and memory for past readings.</span><button class="meas" type="button" data-m="a1">Measure</button></figcaption>
+        </figure>
+
+        <figure class="dev" data-m="a2">
+          <div class="callout">A2</div>
+          <svg viewBox="0 0 360 310" role="img" aria-label="Kingston A2 blood pressure monitor">
+            <defs>
+              <linearGradient id="sh2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E7E6E2"/></linearGradient>
+              <radialGradient id="gr2"><stop offset="0" stop-color="#1D1445" stop-opacity=".25"/><stop offset="1" stop-color="#1D1445" stop-opacity="0"/></radialGradient>
+            </defs>
+            <ellipse cx="180" cy="294" rx="146" ry="13" fill="url(#gr2)"/>
+            <rect x="14" y="12" width="332" height="272" rx="44" fill="url(#sh2)"/>
+            <rect x="34" y="32" width="292" height="178" rx="26" fill="#07090B"/>
+            <g id="a2-sys"></g><g id="a2-dia"></g><g id="a2-pul"></g>
+            <g font-size="10" font-weight="700" fill="#fff" font-family="Hanken Grotesk,Arial,sans-serif" text-anchor="middle">
+              <rect x="268" y="58" width="42" height="22" rx="6" fill="none" stroke="#fff" stroke-opacity=".7"/><text x="289" y="73">SYS</text>
+              <rect x="268" y="108" width="42" height="22" rx="6" fill="none" stroke="#fff" stroke-opacity=".7"/><text x="289" y="123">DIA</text>
+              <rect x="262" y="158" width="52" height="22" rx="6" fill="none" stroke="#fff" stroke-opacity=".7"/><text x="288" y="173">PULSE</text>
+            </g>
+            <rect x="50" y="56" width="5" height="16" rx="2" fill="#34D058"/><rect x="50" y="76" width="5" height="16" rx="2" fill="#34D058"/>
+            <text x="50" y="196" font-size="9" fill="#9AA3A0" font-family="Hanken Grotesk,Arial,sans-serif" font-weight="600">IntelliBPM</text>
+            <g font-size="9" font-weight="600" fill="#6C6C76" font-family="Hanken Grotesk,Arial,sans-serif" text-anchor="middle">
+              <rect x="44" y="230" width="62" height="34" rx="17" fill="#E3E2DE"/><text x="75" y="251">MEM</text>
+              <rect x="136" y="230" width="88" height="34" rx="17" fill="#1D1445"/><text x="180" y="251" fill="#fff">START/STOP</text>
+              <rect x="254" y="230" width="62" height="34" rx="17" fill="#E3E2DE"/><text x="285" y="251">SET</text>
+            </g>
+          </svg>
+          <figcaption><b>A2</b><span>Large backlit display with IntelliBPM technology and memory.</span><button class="meas" type="button" data-m="a2">Measure</button></figcaption>
+        </figure>
+
+        <figure class="dev" data-m="a13">
+          <div class="callout">A13</div>
+          <svg viewBox="0 0 330 250" role="img" aria-label="Kingston A13 blood pressure monitor">
+            <defs>
+              <radialGradient id="gr3"><stop offset="0" stop-color="#1D1445" stop-opacity=".25"/><stop offset="1" stop-color="#1D1445" stop-opacity="0"/></radialGradient>
+            </defs>
+            <ellipse cx="165" cy="226" rx="128" ry="11" fill="url(#gr3)"/>
+            <rect x="14" y="24" width="302" height="184" rx="30" fill="#0E0F12"/>
+            <rect x="290" y="56" width="14" height="30" rx="5" fill="#23262C"/><rect x="290" y="96" width="14" height="30" rx="5" fill="#23262C"/><rect x="290" y="136" width="14" height="30" rx="5" fill="#23262C"/>
+            <rect x="30" y="44" width="248" height="144" rx="14" fill="#040405"/>
+            <text x="154" y="40" text-anchor="middle" font-size="8" letter-spacing="3" fill="#6B6F78" font-family="Hanken Grotesk,Arial,sans-serif" font-weight="600">KINGSTON</text>
+            <g font-size="8" fill="#9AA0AA" font-family="monospace" text-anchor="middle"><text x="70" y="82">SYS</text><text x="142" y="82">DIA</text><text x="214" y="82">PUL</text></g>
+            <g id="a13-sys"></g><g id="a13-dia"></g><g id="a13-pul"></g>
+            <text x="154" y="170" text-anchor="middle" font-size="9" fill="#9AA0AA" font-family="monospace">mmHg · AVG</text>
+          </svg>
+          <figcaption><b>A13</b><span>Compact design with an average of your recent readings.</span><button class="meas" type="button" data-m="a13">Measure</button></figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="tools">
+    <div class="band-head">
+        <h2>Tools you can use today</h2>
+        <p>Quick, free tools to help you understand your numbers. Your readings stay on this device.</p>
+      </div>
+      <div class="tool-grid">
+        <div class="tabs" role="tablist" aria-label="Health tools">
+          <button class="tab" role="tab" id="t-bmi" aria-selected="true" aria-controls="p-bmi" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8.5 8h7M9 12.5h.01M12 12.5h.01M15 12.5h.01M9 16h.01M12 16h.01M15 16h.01"/></svg>
+            <div><b>BMI calculator</b><span>Check your healthy range</span></div>
+          </button>
+          <button class="tab" role="tab" id="t-bp" aria-selected="false" aria-controls="p-bp" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>
+            <div><b>Blood pressure tracker</b><span>Log and track your readings</span></div>
+          </button>
+          <button class="tab" role="tab" id="t-glu" aria-selected="false" aria-controls="p-glu" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.2 6 10.5a6 6 0 0 1-12 0C6 9.2 12 3 12 3z"/></svg>
+            <div><b>Glucose converter</b><span>Convert between mmol/L and mg/dL</span></div>
+          </button>
+        </div>
+
+        <div>
+          <div class="panel" id="p-bmi" role="tabpanel" aria-labelledby="t-bmi">
+            <div class="seg2" role="group" aria-label="Units">
+              <button type="button" data-u="metric" aria-pressed="true">Metric</button>
+              <button type="button" data-u="imperial" aria-pressed="false">Imperial</button>
+            </div>
+            <div class="fields" id="bmi-metric">
+              <label class="f">Height (cm)<input id="h-cm" type="number" inputmode="decimal" placeholder="170"></label>
+              <label class="f">Weight (kg)<input id="w-kg" type="number" inputmode="decimal" placeholder="70"></label>
+            </div>
+            <div class="fields" id="bmi-imp" hidden>
+              <label class="f">Height (ft)<input id="h-ft" type="number" inputmode="numeric" placeholder="5"></label>
+              <label class="f">Height (in)<input id="h-in" type="number" inputmode="decimal" placeholder="7"></label>
+              <label class="f">Weight (lb)<input id="w-lb" type="number" inputmode="decimal" placeholder="154"></label>
+            </div>
+            <div class="big-num" id="bmi-n" aria-live="polite">–</div>
+            <p class="verdict" id="bmi-v">Enter your height and weight.</p>
+            <div class="scale"><i id="bmi-m" style="left:0;display:none"></i></div>
+            <p class="hint">For adults, a BMI of 18.5 to 24.9 is considered the healthy range. BMI is a screening measure, not a diagnosis.</p>
+          </div>
+
+          <div class="panel" id="p-bp" role="tabpanel" aria-labelledby="t-bp" hidden>
+            <div class="fields">
+              <label class="f">Systolic<input id="bp-s" type="number" inputmode="numeric" placeholder="120"></label>
+              <label class="f">Diastolic<input id="bp-d" type="number" inputmode="numeric" placeholder="80"></label>
+              <label class="f">Pulse<input id="bp-p" type="number" inputmode="numeric" placeholder="72"></label>
+            </div>
+            <p class="err" id="bp-err" role="alert"></p>
+            <div class="row-actions">
+              <button class="btn mint sm" id="bp-add" type="button">Save reading</button>
+              <button class="btn ghost sm" id="bp-clear" type="button" hidden>Clear all</button>
+            </div>
+            <div id="bp-out"></div>
+          </div>
+
+          <div class="panel" id="p-glu" role="tabpanel" aria-labelledby="t-glu" hidden>
+            <div class="fields">
+              <label class="f">mmol/L<input id="g-mmol" type="number" inputmode="decimal" placeholder="5.5"></label>
+              <label class="f">mg/dL<input id="g-mg" type="number" inputmode="decimal" placeholder="99"></label>
+            </div>
+            <p class="hint" style="margin-top:0">Type in either box and the other updates. 1 mmol/L equals about 18 mg/dL. For reference only. Follow your care team's advice for target ranges.</p>
+          </div>
+        </div>
+      </div>
+
+  </section>
+
+  <section class="wrap sec" id="range">
+    <h2>Our range</h2>
+    <div class="blocks">
+      <div class="block b1">
+        <div><h3>Blood pressure</h3><p>Home monitors for clear, confident daily checks.</p></div>
+        <a class="go" href="#devices">View monitors</a>
+      </div>
+      <div class="block b2">
+        <div><h3>Glucose monitoring</h3><p>Simple, dependable glucose tracking.</p></div>
+        <span class="tag">Coming soon</span>
+      </div>
+      <div class="block b3">
+        <div><h3>TENS therapy</h3><p>Drug-free pain relief you can use at home.</p></div>
+        <span class="tag">Coming soon</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="dealer" id="dealer">
+    <div class="wrap dealer-in">
+      <div><h2>Find a dealer near you</h2><p>See where Kingston monitors are available in your area.</p></div>
+      <a class="btn" href="#">Find a dealer</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span>© 2026 Kingston Instruments. Proudly Canadian.</span>
+      <nav><a href="#">Support</a><a href="#">About</a><a href="#">Privacy</a></nav>
+    </div>
+    <p class="note">Kingston monitors support home health tracking and are not a substitute for professional medical advice. Talk to your doctor about your readings.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var P={a:'7,3 10,0 30,0 33,3 30,6 10,6',g:'7,36 10,33 30,33 33,36 30,39 10,39',d:'7,69 10,66 30,66 33,69 30,72 10,72',
+    f:'0,9 3,6 6,9 6,30 3,33 0,30',e:'0,42 3,39 6,42 6,63 3,66 0,63',b:'34,9 37,6 40,9 40,30 37,33 34,30',c:'34,42 37,39 40,42 40,63 37,66 34,63'};
+  var S={'0':'abcdef','1':'bc','2':'abged','3':'abgcd','4':'fgbc','5':'afgcd','6':'afgedc','7':'abc','8':'abcdefg','9':'abcdfg'};
+  function digit(ch,x){var on=S[ch]||'';return Object.keys(P).map(function(k){return '<polygon class="'+(on.indexOf(k)>-1?'on':'off')+'" points="'+P[k]+'" transform="translate('+x+' 0)"/>';}).join('');}
+  function segs(val,n,s,xr,y,col){
+    var str=(val==null)?'':String(Math.round(val));while(str.length<n)str=' '+str;
+    var g='';for(var i=0;i<n;i++)g+=digit(str.charAt(i),i*48);
+    return '<g transform="translate('+(xr-n*48*s+4*s)+' '+y+') scale('+s+') skewX(-6)" fill="'+col+'">'+g+'</g>';
+  }
+  var CFG={
+    a1:{col:'#1F2B1C',sys:[200,76,.42],dia:[200,114,.42],pul:[200,152,.27]},
+    a2:{col:'#FFFFFF',sys:[256,48,.62],dia:[256,100,.62],pul:[256,152,.36]},
+    a13:{col:'#FFFFFF',sys:[96,92,.42],dia:[168,92,.42],pul:[240,92,.42]}
+  };
+  function show(m,a,b,c){
+    var f=CFG[m];
+    ['sys','dia','pul'].forEach(function(k,i){
+      var v=[a,b,c][i],r=f[k];
+      document.getElementById(m+'-'+k).innerHTML=segs(v,3,r[2],r[0],r[1],f.col);
+    });
+  }
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,tok={a1:0,a2:0,a13:0},F={s:120,d:80,p:72};
+  function out(t){return 1-Math.pow(1-t,3);}
+  function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+  function run(m,delay){
+    var me=++tok[m];
+    if(reduce){show(m,F.s,F.d,F.p);return;}
+    show(m,0,null,null);
+    var t0=performance.now()+(delay||0),P1=1500,P2=1400;
+    function step(now){
+      if(me!==tok[m])return;
+      var t=now-t0;
+      if(t<0){requestAnimationFrame(step);return;}
+      if(t<P1)show(m,out(t/P1)*176,null,null);
+      else if(t<P1+P2)show(m,176+(F.s-176)*ease((t-P1)/P2),null,null);
+      else{show(m,F.s,F.d,F.p);return;}
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  ['a1','a2','a13'].forEach(function(m,i){run(m,i*250);});
+  [].slice.call(document.querySelectorAll('.meas')).forEach(function(b){b.addEventListener('click',function(){run(b.getAttribute('data-m'),0);});});
+  [].slice.call(document.querySelectorAll('.dev svg')).forEach(function(s){s.style.cursor='pointer';s.addEventListener('click',function(){run(s.parentNode.getAttribute('data-m'),0);});});
+
+  (function(){
+    function $(id){return document.getElementById(id);}
+    var tabs=[].slice.call(document.querySelectorAll('.tab'));
+    tabs.forEach(function(t){t.addEventListener('click',function(){
+      tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on?'true':'false');$(x.getAttribute('aria-controls')).hidden=!on;});
+    });});
+
+    /* BMI */
+    var units='metric';
+    function bmi(){
+      var h,w;
+      if(units==='metric'){h=parseFloat($('h-cm').value)/100;w=parseFloat($('w-kg').value);}
+      else{h=((parseFloat($('h-ft').value)||0)*12+(parseFloat($('h-in').value)||0))*0.0254;w=parseFloat($('w-lb').value)*0.45359237;}
+      var m=$('bmi-m');
+      if(!(h>0.5&&h<2.7&&w>10&&w<400)){$('bmi-n').textContent='–';$('bmi-v').textContent='Enter your height and weight.';m.style.display='none';return;}
+      var b=w/(h*h),v;
+      if(b<18.5)v='Below the healthy range';else if(b<25)v='Within the healthy range';else if(b<30)v='Above the healthy range';else v='Well above the healthy range';
+      $('bmi-n').innerHTML=b.toFixed(1)+'<small>BMI</small>';
+      $('bmi-v').textContent=v;
+      m.style.display='block';
+      m.style.left='calc('+Math.max(0,Math.min(1,(b-15)/25))*100+'% - 2px)';
+    }
+    ['h-cm','w-kg','h-ft','h-in','w-lb'].forEach(function(id){$(id).addEventListener('input',bmi);});
+    [].slice.call(document.querySelectorAll('.seg2 button')).forEach(function(b){b.addEventListener('click',function(){
+      units=b.getAttribute('data-u');
+      [].slice.call(document.querySelectorAll('.seg2 button')).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+      $('bmi-metric').hidden=units!=='metric';$('bmi-imp').hidden=units!=='imperial';
+      bmi();
+    });});
+
+    /* Glucose */
+    var mm=$('g-mmol'),mg=$('g-mg');
+    mm.addEventListener('input',function(){var v=parseFloat(mm.value);mg.value=isFinite(v)?(v*18.016).toFixed(0):'';});
+    mg.addEventListener('input',function(){var v=parseFloat(mg.value);mm.value=isFinite(v)?(v/18.016).toFixed(1):'';});
+
+    /* Blood pressure tracker (stored on this device only) */
+    var KEY='ki-bp-log',log=[];
+    try{log=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(log))log=[];}catch(e){log=[];}
+    function save(){try{localStorage.setItem(KEY,JSON.stringify(log));}catch(e){}}
+    function fmt(t){var d=new Date(t);return d.toLocaleDateString(undefined,{month:'short',day:'numeric'})+', '+d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});}
+    function chart(items){
+      var W=400,H=130,pad=10,n=items.length;
+      var lo=Math.min.apply(null,items.map(function(r){return r.d;}))-10,hi=Math.max.apply(null,items.map(function(r){return r.s;}))+10;
+      function X(i){return n===1?W/2:pad+i*(W-2*pad)/(n-1);}
+      function Y(v){return pad+(hi-v)*(H-2*pad)/(hi-lo);}
+      function line(key,col){
+        var pts=items.map(function(r,i){return X(i).toFixed(1)+','+Y(r[key]).toFixed(1);});
+        var dots=items.map(function(r,i){return '<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(r[key]).toFixed(1)+'" r="3.5" fill="'+col+'"/>';}).join('');
+        return (n>1?'<polyline points="'+pts.join(' ')+'" fill="none" stroke="'+col+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>':'')+dots;
+      }
+      return '<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Chart of your recent readings">'+line('s','#7A5CFF')+line('d','#12A594')+'</svg><div class="legend"><span><i style="background:#7A5CFF"></i>Systolic</span><span><i style="background:#12A594"></i>Diastolic</span></div>';
+    }
+    function renderBP(){
+      var out=$('bp-out');
+      $('bp-clear').hidden=!log.length;
+      if(!log.length){out.innerHTML='<p class="hint">No readings yet. Save your first reading above.</p>';return;}
+      var last=log.slice(0,7),as=0,ad=0;
+      last.forEach(function(r){as+=r.s;ad+=r.d;});
+      var html='<div class="big-num" style="margin-top:22px">'+Math.round(as/last.length)+'/'+Math.round(ad/last.length)+'<small>average of last '+last.length+'</small></div>';
+      html+=chart(log.slice(0,14).reverse());
+      html+='<ul class="log">'+log.slice(0,10).map(function(r,i){
+        return '<li><div><b>'+r.s+'/'+r.d+'</b>'+(r.p?' <span>· '+r.p+' bpm</span>':'')+'<br><span>'+fmt(r.t)+'</span></div><button type="button" data-i="'+i+'" aria-label="Delete reading from '+fmt(r.t)+'">Delete</button></li>';
+      }).join('')+'</ul>';
+      out.innerHTML=html;
+    }
+    $('bp-add').addEventListener('click',function(){
+      var s=parseInt($('bp-s').value,10),d=parseInt($('bp-d').value,10),p=parseInt($('bp-p').value,10),err=$('bp-err');
+      if(!(s>=60&&s<=260&&d>=30&&d<=160)){err.textContent='Enter systolic (60 to 260) and diastolic (30 to 160) values.';return;}
+      if(s<=d){err.textContent='Systolic should be higher than diastolic. Check the numbers on your monitor.';return;}
+      err.textContent='';
+      log.unshift({s:s,d:d,p:(p>=30&&p<=220)?p:0,t:Date.now()});
+      log=log.slice(0,60);save();
+      $('bp-s').value='';$('bp-d').value='';$('bp-p').value='';$('bp-s').focus();
+      renderBP();
+    });
+    $('bp-out').addEventListener('click',function(e){
+      var i=e.target.getAttribute&&e.target.getAttribute('data-i');
+      if(i!==null&&i!==undefined&&e.target.tagName==='BUTTON'){log.splice(parseInt(i,10),1);save();renderBP();}
+    });
+    $('bp-clear').addEventListener('click',function(){log=[];save();renderBP();});
+    renderBP();
+  })();
+
+  var mb=document.getElementById('menuBtn'),lk=document.getElementById('links');
+  mb.addEventListener('click',function(){var o=lk.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false');});
+  lk.addEventListener('click',function(e){if(e.target.tagName==='A'){lk.classList.remove('open');mb.setAttribute('aria-expanded','false');}});
+})();
+</script>
+</body>
+</html>

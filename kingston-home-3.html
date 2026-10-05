@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Kingston Instruments – Home health monitoring (concept 3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0716; --panel:#110D22; --panel2:#171230; --ink:#F3F0FF; --muted:#9A93B8;
+  --line:rgba(190,170,255,.16); --line2:rgba(190,170,255,.34);
+  --uv:#7C5CFF; --lav:#C9BBFF; --cta:#EDE8FF;
+  --display:"Geist","Helvetica Neue",Arial,sans-serif; --mono:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;
+  --gutter:clamp(20px,5vw,56px);
+  color-scheme:dark;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box;border-radius:0}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--display);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lav);outline-offset:3px}
+.wrap{max-width:1280px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+.mono{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+header{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;background:rgba(10,7,22,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.nav{display:flex;align-items:center;gap:32px;height:72px;position:relative}
+.brand{display:flex;align-items:center;gap:16px;text-decoration:none}
+.brand b{display:block;font:600 1.05rem var(--display);letter-spacing:.2em;line-height:1}
+.brand i{display:block;font:400 .6rem var(--mono);font-style:normal;letter-spacing:.34em;color:var(--muted);margin-top:5px}
+.brand .ca{display:flex;align-items:center;gap:7px;padding-left:16px;border-left:1px solid var(--line2);font:400 .62rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);line-height:1.2}
+.brand svg{width:15px;height:15px;fill:#E5483F}
+.links{display:flex;gap:30px;margin:0 auto;padding:0;list-style:none}
+.links a{text-decoration:none;font-size:.9rem;color:var(--muted);transition:color .2s}
+.links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;font:500 .92rem var(--display);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:background .2s,color .2s,border-color .2s}
+.btn.sm{min-height:40px;padding:0 20px;font-size:.88rem}
+.btn.primary,.btn.mint{background:var(--cta);color:var(--bg)}
+.btn.primary:hover,.btn.mint:hover{background:var(--lav)}
+.btn.ghost{border-color:var(--line2);color:var(--ink);background:transparent}
+.btn.ghost:hover{border-color:var(--lav);background:rgba(201,187,255,.08)}
+.menu-btn{display:none;width:44px;height:44px;border:1px solid var(--line2);background:transparent;color:var(--ink);place-items:center;cursor:pointer}
+.menu-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6}
+
+/* hero */
+.hero{position:relative;border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:72px 72px;opacity:.35;-webkit-mask-image:radial-gradient(70% 80% at 70% 40%,#000,transparent);mask-image:radial-gradient(70% 80% at 70% 40%,#000,transparent);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+.hero-copy{padding:clamp(48px,8vw,112px) clamp(24px,4vw,64px) clamp(48px,8vw,112px) 0;display:flex;flex-direction:column;justify-content:center}
+h1{font:500 clamp(3rem,6.6vw,5.8rem)/.94 var(--display);letter-spacing:-.045em;margin:18px 0 24px}
+.lede{font-size:clamp(1.02rem,1.4vw,1.2rem);color:var(--muted);max-width:28em;margin:0 0 32px}
+.lede b{color:var(--ink);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-stage{border-left:1px solid var(--line);padding:clamp(28px,4vw,56px) 0 clamp(28px,4vw,56px) clamp(24px,4vw,56px);display:flex;flex-direction:column;justify-content:center;gap:0}
+
+.device{position:relative;background:var(--panel);border:1px solid var(--line2);padding:20px 22px 0}
+.device .c{position:absolute;width:12px;height:12px;border:0 solid var(--lav)}
+.c.tl{left:-1px;top:-1px;border-top-width:2px;border-left-width:2px}
+.c.tr{right:-1px;top:-1px;border-top-width:2px;border-right-width:2px}
+.c.bl{left:-1px;bottom:-1px;border-bottom-width:2px;border-left-width:2px}
+.c.br{right:-1px;bottom:-1px;border-bottom-width:2px;border-right-width:2px}
+.dhead{display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.dhead .st{display:flex;align-items:center;gap:8px}
+.dot{width:7px;height:7px;background:var(--muted)}
+.dot.on{background:var(--lav)}
+@media (prefers-reduced-motion:no-preference){.dot.on{animation:blink 1.6s steps(2,end) infinite}}
+@keyframes blink{50%{opacity:.25}}
+.rows{padding:10px 0 4px}
+.row{display:grid;grid-template-columns:1fr 64px;align-items:center;gap:16px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row svg{justify-self:end;width:auto;display:block;fill:var(--seg)}
+.row.big svg{height:clamp(60px,9vw,92px);margin:10px 0}
+.row.small svg{height:clamp(34px,5vw,46px);margin:10px 0}
+.row svg .on{opacity:1}
+.row svg .off{opacity:.07}
+.lab{font:400 .72rem var(--mono);letter-spacing:.08em;color:var(--muted);line-height:1.3}
+.lab b{display:block;font-weight:500;color:var(--ink);font-size:.8rem}
+.ecg{position:relative;height:44px;overflow:hidden;border-top:1px solid var(--line);margin:0 -22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.ecg svg{position:absolute;left:0;top:0;width:720px;height:44px;fill:none;stroke:var(--lav);stroke-width:1.5;stroke-linejoin:miter}
+@media (prefers-reduced-motion:no-preference){.ecg svg{animation:scan 1.6s linear infinite}}
+@keyframes scan{to{transform:translateX(-120px)}}
+.dctl{display:flex;justify-content:space-between;align-items:center;margin:0 -22px;border-top:1px solid var(--line)}
+.dctl span,.dctl button{flex:1;text-align:center;font:400 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:14px 0}
+.dctl button{background:transparent;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);color:var(--ink);cursor:pointer;transition:background .2s}
+.dctl button:hover{background:rgba(201,187,255,.1)}
+.device[data-model="a1"]{--seg:#D8EBA8}
+.device[data-model="a2"]{--seg:#FFFFFF}
+.device[data-model="a13"]{--seg:#C9BBFF}
+
+.mtabs{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line2);border-top:0}
+.mtab{background:transparent;border:0;border-left:1px solid var(--line);color:var(--muted);text-align:left;padding:14px 16px 16px;cursor:pointer;font:inherit;position:relative;transition:color .2s,background .2s}
+.mtab:first-child{border-left:0}
+.mtab b{display:block;font:500 1.15rem var(--display);color:inherit}
+.mtab span{display:block;font-size:.8rem;line-height:1.35;margin-top:2px}
+.mtab[aria-selected="true"]{color:var(--ink);background:var(--panel2)}
+.mtab[aria-selected="true"]::before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--lav)}
+
+/* sections */
+.sec{padding-top:clamp(56px,8vw,112px);padding-bottom:clamp(56px,8vw,112px);border-bottom:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:end;margin-bottom:clamp(32px,5vw,56px)}
+h2{font:500 clamp(2rem,4.2vw,3.4rem)/1 var(--display);letter-spacing:-.04em;margin:0}
+.sec-head p{margin:0;color:var(--muted);max-width:30em}
+
+.models{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line2);border-left:1px solid var(--line)}
+.model{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 28px 8px;transition:background .25s}
+.model:hover{background:var(--panel)}
+.model h3{font:400 clamp(3.4rem,6vw,5rem)/1 var(--display);letter-spacing:-.05em;margin:0 0 22px}
+.model ul{list-style:none;margin:0;padding:0}
+.model li{padding:12px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+.model li:first-child{color:var(--ink)}
+.lines{border-top:1px solid var(--line2)}
+.ln{display:grid;grid-template-columns:1.1fr 1.6fr auto;gap:24px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line)}
+.ln h3{font:500 clamp(1.4rem,2.6vw,2rem)/1.1 var(--display);letter-spacing:-.03em;margin:0}
+.ln p{margin:0;color:var(--muted)}
+.ln a{font-weight:500;text-decoration:none;border-bottom:1px solid var(--lav);padding-bottom:2px}
+.ln .tag{font:400 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line2);padding:6px 12px}
+.ln.off h3{color:var(--muted)}
+
+/* tools */
+.band-head{margin-bottom:36px}
+.band-head h2{margin-bottom:14px}
+.band-head p{margin:0;color:var(--muted);max-width:34em}
+.tool-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr);gap:0;align-items:stretch;border:1px solid var(--line2)}
+.tabs{display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.tab{display:flex;gap:14px;align-items:flex-start;text-align:left;width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);padding:22px 22px;color:var(--ink);cursor:pointer;font:inherit;position:relative;transition:background .2s}
+.tab:last-child{border-bottom:0}
+.tab:hover{background:rgba(201,187,255,.05)}
+.tab[aria-selected="true"]{background:var(--panel2)}
+.tab[aria-selected="true"]::before{content:"";position:absolute;left:-1px;top:0;bottom:0;width:2px;background:var(--lav)}
+.tab svg{width:24px;height:24px;flex:none;stroke:var(--lav);fill:none;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;margin-top:2px}
+.tab b{display:block;font:500 1.05rem var(--display)}
+.tab span{color:var(--muted);font-size:.9rem}
+.panel{background:var(--panel);padding:clamp(22px,3.5vw,40px);min-height:360px}
+.panel[hidden],.fields[hidden]{display:none}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px;margin-bottom:18px}
+label.f{display:block;font:400 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+label.f input{display:block;width:100%;margin-top:8px;height:54px;border:1px solid var(--line2);background:var(--bg);color:var(--ink);font:400 1.2rem var(--display);padding:0 16px;text-transform:none;letter-spacing:0}
+label.f input:focus-visible{outline:2px solid var(--lav);outline-offset:0}
+.seg2{display:inline-flex;border:1px solid var(--line2);margin-bottom:18px}
+.seg2 button{border:0;background:transparent;color:var(--muted);font:500 .8rem var(--display);height:34px;padding:0 18px;cursor:pointer}
+.seg2 button[aria-pressed="true"]{background:var(--cta);color:var(--bg)}
+.big-num{font:300 clamp(3rem,7vw,4.4rem)/1 var(--display);letter-spacing:-.05em}
+.big-num small{font:400 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-left:12px}
+.verdict{color:var(--lav);font-weight:500;margin:10px 0 18px}
+.scale{position:relative;height:4px;background:linear-gradient(90deg,#5B86B5 0 14%,#47C2A2 14% 40%,#DDBB4B 40% 60%,#DE7C3A 60% 100%)}
+.scale i{position:absolute;top:-7px;width:2px;height:18px;background:var(--ink);transition:left .3s}
+.hint{font-size:.82rem;color:var(--muted);margin:16px 0 0}
+.err{color:#FF8F84;font-size:.88rem;min-height:1.3em;margin:0 0 8px}
+.log{list-style:none;margin:14px 0 0;padding:0;max-height:200px;overflow:auto}
+.log li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.log b{font:500 1.05rem var(--display)}
+.log span{color:var(--muted);font-size:.85rem}
+.log button{background:transparent;border:0;color:var(--muted);cursor:pointer;font:inherit;font-size:.85rem;padding:6px}
+.chart{width:100%;height:auto;display:block;margin-top:14px}
+.legend{display:flex;gap:16px;font-size:.82rem;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;margin-right:6px}
+.row-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+
+.dealer{padding:clamp(56px,8vw,104px) 0;border-bottom:1px solid var(--line)}
+.dealer-in{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+.dealer h2{margin-bottom:10px}
+.dealer p{margin:0;color:var(--muted)}
+footer{padding:32px 0 44px;color:var(--muted);font-size:.88rem}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px}
+.foot nav{display:flex;gap:24px}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--ink)}
+.note{margin-top:16px;font-size:.82rem;max-width:56em}
+
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-copy{padding:48px 0 32px}
+  .hero-stage{border-left:0;padding:0 0 40px}
+  .links{display:none;position:absolute;left:calc(-1*var(--gutter));right:calc(-1*var(--gutter));top:72px;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line2);padding:0 var(--gutter)}
+  .links.open{display:flex}
+  .links a{display:block;padding:16px 0;font-size:1.05rem;color:var(--ink)}
+  .links li+li{border-top:1px solid var(--line)}
+  .menu-btn{display:grid;margin-left:auto}
+  .nav{gap:12px}.nav>.btn{display:none}
+  .brand .ca{display:none}
+  .sec-head{grid-template-columns:1fr}
+  .models{grid-template-columns:1fr}
+  .tool-grid{grid-template-columns:1fr}
+  .tabs{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .tab{width:auto;flex:none;border-bottom:0;border-right:1px solid var(--line);padding:16px 18px;align-items:center}
+  .tab span{display:none}
+  .tab[aria-selected="true"]::before{left:0;right:0;top:-1px;bottom:auto;width:auto;height:2px}
+  .ln{grid-template-columns:1fr auto;gap:8px 16px}
+  .ln p{grid-column:1 / -1;order:3}
+}
+@media (max-width:480px){.mtab span{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#" aria-label="Kingston Instruments home">
+      <div><b>KINGSTON</b><i>INSTRUMENTS</i></div>
+      <span class="ca"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.2 4.3 2.6-1.3-.9 6.1 3.2-2.2 1 2.2 3.6-.8-1.3 4.4 1.5 1-5.8 5-.5 1.9-6.3-1.3-.2 5.8h-1.2l-.2-5.8-6.3 1.3-.5-1.9L.7 14.1l1.5-1-1.3-4.4 3.6.8 1-2.2 3.2 2.2-.9-6.1 2.6 1.3z"/></svg>Proudly<br>Canadian</span>
+    </a>
+    <ul class="links" id="links">
+      <li><a href="#range">Products</a></li>
+      <li><a href="#">Technology</a></li>
+      <li><a href="#">Health insights</a></li>
+      <li><a href="#tools">Health tools</a></li>
+      <li><a href="#">Support</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a class="btn ghost sm" href="#dealer">Find a dealer</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="links"><svg viewBox="0 0 24 24"><path d="M3 8h18M3 16h18"/></svg></button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="mono">Home health monitoring</span>
+        <h1>Precision with care.</h1>
+        <p class="lede"><b>Know your numbers. Own your health.</b> Intelligent monitoring for everyday confidence.</p>
+        <div class="cta">
+          <a class="btn primary" href="#range">Explore the range</a>
+          <a class="btn ghost" href="#dealer">Find your monitor</a>
+        </div>
+      </div>
+
+      <div class="hero-stage">
+        <div class="device" id="device" data-model="a2">
+          <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+          <div class="dhead mono" aria-live="polite">
+            <span id="dname">Kingston A2</span>
+            <span class="st"><span class="dot" id="dot"></span><span id="stext">Ready</span></span>
+          </div>
+          <div class="rows">
+            <div class="row big"><div id="sys"></div><div class="lab"><b>SYS</b>mmHg</div></div>
+            <div class="row big"><div id="dia"></div><div class="lab"><b>DIA</b>mmHg</div></div>
+            <div class="row small"><div id="pul"></div><div class="lab"><b>PULSE</b>/min</div></div>
+          </div>
+          <div class="ecg" aria-hidden="true"><svg id="ecg" viewBox="0 0 720 44"></svg></div>
+          <div class="dctl"><span>Mem</span><button id="startBtn" type="button">Start/Stop</button><span>Set</span></div>
+        </div>
+        <div class="mtabs" role="tablist" aria-label="Choose a monitor">
+          <button class="mtab" role="tab" aria-selected="false" data-m="a1"><b>A1</b><span>LCD display</span></button>
+          <button class="mtab" role="tab" aria-selected="true" data-m="a2"><b>A2</b><span>Backlit, IntelliBPM</span></button>
+          <button class="mtab" role="tab" aria-selected="false" data-m="a13"><b>A13</b><span>Compact, average</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="range">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Choose your monitor</h2>
+        <p>Three blood pressure monitors, one clear standard: readings you can read at a glance and trust.</p>
+      </div>
+      <div class="models">
+        <div class="model"><h3>A1</h3><ul><li>LCD display with time</li><li>Memory for past readings</li><li>One-touch Start/Stop</li></ul></div>
+        <div class="model"><h3>A2</h3><ul><li>Large backlit display</li><li>IntelliBPM technology</li><li>Memory for past readings</li></ul></div>
+        <div class="model"><h3>A13</h3><ul><li>Compact design</li><li>Average of recent readings</li><li>Memory for past readings</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="tools">
+    <div class="wrap">
+      <div class="band-head">
+        <h2>Tools you can use today</h2>
+        <p>Quick, free tools to help you understand your numbers. Your readings stay on this device.</p>
+      </div>
+      <div class="tool-grid">
+        <div class="tabs" role="tablist" aria-label="Health tools">
+          <button class="tab" role="tab" id="t-bmi" aria-selected="true" aria-controls="p-bmi" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8.5 8h7M9 12.5h.01M12 12.5h.01M15 12.5h.01M9 16h.01M12 16h.01M15 16h.01"/></svg>
+            <div><b>BMI calculator</b><span>Check your healthy range</span></div>
+          </button>
+          <button class="tab" role="tab" id="t-bp" aria-selected="false" aria-controls="p-bp" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>
+            <div><b>Blood pressure tracker</b><span>Log and track your readings</span></div>
+          </button>
+          <button class="tab" role="tab" id="t-glu" aria-selected="false" aria-controls="p-glu" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.2 6 10.5a6 6 0 0 1-12 0C6 9.2 12 3 12 3z"/></svg>
+            <div><b>Glucose converter</b><span>Convert between mmol/L and mg/dL</span></div>
+          </button>
+        </div>
+
+        <div>
+          <div class="panel" id="p-bmi" role="tabpanel" aria-labelledby="t-bmi">
+            <div class="seg2" role="group" aria-label="Units">
+              <button type="button" data-u="metric" aria-pressed="true">Metric</button>
+              <button type="button" data-u="imperial" aria-pressed="false">Imperial</button>
+            </div>
+            <div class="fields" id="bmi-metric">
+              <label class="f">Height (cm)<input id="h-cm" type="number" inputmode="decimal" placeholder="170"></label>
+              <label class="f">Weight (kg)<input id="w-kg" type="number" inputmode="decimal" placeholder="70"></label>
+            </div>
+            <div class="fields" id="bmi-imp" hidden>
+              <label class="f">Height (ft)<input id="h-ft" type="number" inputmode="numeric" placeholder="5"></label>
+              <label class="f">Height (in)<input id="h-in" type="number" inputmode="decimal" placeholder="7"></label>
+              <label class="f">Weight (lb)<input id="w-lb" type="number" inputmode="decimal" placeholder="154"></label>
+            </div>
+            <div class="big-num" id="bmi-n" aria-live="polite">–</div>
+            <p class="verdict" id="bmi-v">Enter your height and weight.</p>
+            <div class="scale"><i id="bmi-m" style="left:0;display:none"></i></div>
+            <p class="hint">For adults, a BMI of 18.5 to 24.9 is considered the healthy range. BMI is a screening measure, not a diagnosis.</p>
+          </div>
+
+          <div class="panel" id="p-bp" role="tabpanel" aria-labelledby="t-bp" hidden>
+            <div class="fields">
+              <label class="f">Systolic<input id="bp-s" type="number" inputmode="numeric" placeholder="120"></label>
+              <label class="f">Diastolic<input id="bp-d" type="number" inputmode="numeric" placeholder="80"></label>
+              <label class="f">Pulse<input id="bp-p" type="number" inputmode="numeric" placeholder="72"></label>
+            </div>
+            <p class="err" id="bp-err" role="alert"></p>
+            <div class="row-actions">
+              <button class="btn mint sm" id="bp-add" type="button">Save reading</button>
+              <button class="btn ghost sm" id="bp-clear" type="button" hidden>Clear all</button>
+            </div>
+            <div id="bp-out"></div>
+          </div>
+
+          <div class="panel" id="p-glu" role="tabpanel" aria-labelledby="t-glu" hidden>
+            <div class="fields">
+              <label class="f">mmol/L<input id="g-mmol" type="number" inputmode="decimal" placeholder="5.5"></label>
+              <label class="f">mg/dL<input id="g-mg" type="number" inputmode="decimal" placeholder="99"></label>
+            </div>
+            <p class="hint" style="margin-top:0">Type in either box and the other updates. 1 mmol/L equals about 18 mg/dL. For reference only. Follow your care team's advice for target ranges.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><h2>Our range</h2></div>
+      <div class="lines">
+        <div class="ln"><h3>Blood pressure</h3><p>Upper-arm monitors for daily checks at home.</p><a href="#range">View monitors</a></div>
+        <div class="ln off"><h3>Glucose monitoring</h3><p>Simple, dependable glucose tracking.</p><span class="tag">Coming soon</span></div>
+        <div class="ln off"><h3>TENS therapy</h3><p>Drug-free pain relief you can use at home.</p><span class="tag">Coming soon</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dealer" id="dealer">
+    <div class="wrap dealer-in">
+      <div><h2>Find a dealer near you</h2><p>See where Kingston monitors are available in your area.</p></div>
+      <a class="btn primary" href="#">Find a dealer</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span>© 2026 Kingston Instruments. Proudly Canadian.</span>
+      <nav><a href="#">Support</a><a href="#">About</a><a href="#">Privacy</a></nav>
+    </div>
+    <p class="note">Kingston monitors support home health tracking and are not a substitute for professional medical advice. Talk to your doctor about your readings.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var P={a:'7,3 10,0 30,0 33,3 30,6 10,6',g:'7,36 10,33 30,33 33,36 30,39 10,39',d:'7,69 10,66 30,66 33,69 30,72 10,72',
+    f:'0,9 3,6 6,9 6,30 3,33 0,30',e:'0,42 3,39 6,42 6,63 3,66 0,63',b:'34,9 37,6 40,9 40,30 37,33 34,30',c:'34,42 37,39 40,42 40,63 37,66 34,63'};
+  var S={'0':'abcdef','1':'bc','2':'abged','3':'abgcd','4':'fgbc','5':'afgcd','6':'afgedc','7':'abc','8':'abcdefg','9':'abcdfg'};
+  function digit(ch,x){var on=S[ch]||'';return Object.keys(P).map(function(k){return '<polygon class="'+(on.indexOf(k)>-1?'on':'off')+'" points="'+P[k]+'" transform="translate('+x+' 0)"/>';}).join('');}
+  function draw(id,val,n){
+    var s=(val==null)?'':String(Math.round(val));while(s.length<n)s=' '+s;
+    var g='';for(var i=0;i<n;i++)g+=digit(s.charAt(i),i*48);
+    var w=n*48+6;
+    document.getElementById(id).innerHTML='<svg viewBox="-8 0 '+w+' 72" style="aspect-ratio:'+w+'/72" role="img" aria-label="'+(val==null?'blank':Math.round(val))+'"><g transform="skewX(-6)">'+g+'</g></svg>';
+  }
+  function show(a,b,c){draw('sys',a,3);draw('dia',b,3);draw('pul',c,3);}
+
+  /* ECG trace */
+  var seg='h30 l4 -3 l4 3 h14 l3 4 l5 -22 l5 28 l4 -10 h12 l6 -5 l6 5 h27',d='M0 22';
+  for(var i=0;i<6;i++)d+=seg;
+  document.getElementById('ecg').innerHTML='<path d="'+d+'"/>';
+
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches,token=0;
+  var dot=document.getElementById('dot'),st=document.getElementById('stext'),F={s:120,d:80,p:72};
+  function out(t){return 1-Math.pow(1-t,3);}
+  function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+  function run(){
+    var me=++token;dot.classList.remove('on');
+    if(reduce){show(F.s,F.d,F.p);st.textContent='Complete';dot.classList.add('on');return;}
+    st.textContent='Measuring';show(0,null,null);
+    var t0=performance.now(),P1=1500,P2=1400;
+    function step(now){
+      if(me!==token)return;
+      var t=now-t0;
+      if(t<P1)show(out(t/P1)*176,null,null);
+      else if(t<P1+P2)show(176+(F.s-176)*ease((t-P1)/P2),null,null);
+      else{show(F.s,F.d,F.p);st.textContent='Complete';dot.classList.add('on');return;}
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var dev=document.getElementById('device'),tabs=[].slice.call(document.querySelectorAll('.mtab'));
+  function pick(m){
+    dev.setAttribute('data-model',m);
+    tabs.forEach(function(b){b.setAttribute('aria-selected',b.getAttribute('data-m')===m?'true':'false');});
+    document.getElementById('dname').textContent='Kingston '+m.toUpperCase();
+    run();
+  }
+  tabs.forEach(function(b){b.addEventListener('click',function(){pick(b.getAttribute('data-m'));});});
+  document.getElementById('startBtn').addEventListener('click',run);
+  pick('a2');
+
+  (function(){
+    function $(id){return document.getElementById(id);}
+    var tabs=[].slice.call(document.querySelectorAll('.tab'));
+    tabs.forEach(function(t){t.addEventListener('click',function(){
+      tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on?'true':'false');$(x.getAttribute('aria-controls')).hidden=!on;});
+    });});
+
+    /* BMI */
+    var units='metric';
+    function bmi(){
+      var h,w;
+      if(units==='metric'){h=parseFloat($('h-cm').value)/100;w=parseFloat($('w-kg').value);}
+      else{h=((parseFloat($('h-ft').value)||0)*12+(parseFloat($('h-in').value)||0))*0.0254;w=parseFloat($('w-lb').value)*0.45359237;}
+      var m=$('bmi-m');
+      if(!(h>0.5&&h<2.7&&w>10&&w<400)){$('bmi-n').textContent='–';$('bmi-v').textContent='Enter your height and weight.';m.style.display='none';return;}
+      var b=w/(h*h),v;
+      if(b<18.5)v='Below the healthy range';else if(b<25)v='Within the healthy range';else if(b<30)v='Above the healthy range';else v='Well above the healthy range';
+      $('bmi-n').innerHTML=b.toFixed(1)+'<small>BMI</small>';
+      $('bmi-v').textContent=v;
+      m.style.display='block';
+      m.style.left='calc('+Math.max(0,Math.min(1,(b-15)/25))*100+'% - 2px)';
+    }
+    ['h-cm','w-kg','h-ft','h-in','w-lb'].forEach(function(id){$(id).addEventListener('input',bmi);});
+    [].slice.call(document.querySelectorAll('.seg2 button')).forEach(function(b){b.addEventListener('click',function(){
+      units=b.getAttribute('data-u');
+      [].slice.call(document.querySelectorAll('.seg2 button')).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+      $('bmi-metric').hidden=units!=='metric';$('bmi-imp').hidden=units!=='imperial';
+      bmi();
+    });});
+
+    /* Glucose */
+    var mm=$('g-mmol'),mg=$('g-mg');
+    mm.addEventListener('input',function(){var v=parseFloat(mm.value);mg.value=isFinite(v)?(v*18.016).toFixed(0):'';});
+    mg.addEventListener('input',function(){var v=parseFloat(mg.value);mm.value=isFinite(v)?(v/18.016).toFixed(1):'';});
+
+    /* Blood pressure tracker (stored on this device only) */
+    var KEY='ki-bp-log',log=[];
+    try{log=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(log))log=[];}catch(e){log=[];}
+    function save(){try{localStorage.setItem(KEY,JSON.stringify(log));}catch(e){}}
+    function fmt(t){var d=new Date(t);return d.toLocaleDateString(undefined,{month:'short',day:'numeric'})+', '+d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});}
+    function chart(items){
+      var W=400,H=130,pad=10,n=items.length;
+      var lo=Math.min.apply(null,items.map(function(r){return r.d;}))-10,hi=Math.max.apply(null,items.map(function(r){return r.s;}))+10;
+      function X(i){return n===1?W/2:pad+i*(W-2*pad)/(n-1);}
+      function Y(v){return pad+(hi-v)*(H-2*pad)/(hi-lo);}
+      function line(key,col){
+        var pts=items.map(function(r,i){return X(i).toFixed(1)+','+Y(r[key]).toFixed(1);});
+        var dots=items.map(function(r,i){return '<circle cx="'+X(i).toFixed(1)+'" cy="'+Y(r[key]).toFixed(1)+'" r="3.5" fill="'+col+'"/>';}).join('');
+        return (n>1?'<polyline points="'+pts.join(' ')+'" fill="none" stroke="'+col+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>':'')+dots;
+      }
+      return '<svg class="chart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Chart of your recent readings">'+line('s','#F2EEFF')+line('d','#9B86FF')+'</svg><div class="legend"><span><i style="background:#F2EEFF"></i>Systolic</span><span><i style="background:#9B86FF"></i>Diastolic</span></div>';
+    }
+    function renderBP(){
+      var out=$('bp-out');
+      $('bp-clear').hidden=!log.length;
+      if(!log.length){out.innerHTML='<p class="hint">No readings yet. Save your first reading above.</p>';return;}
+      var last=log.slice(0,7),as=0,ad=0;
+      last.forEach(function(r){as+=r.s;ad+=r.d;});
+      var html='<div class="big-num" style="margin-top:22px">'+Math.round(as/last.length)+'/'+Math.round(ad/last.length)+'<small>average of last '+last.length+'</small></div>';
+      html+=chart(log.slice(0,14).reverse());
+      html+='<ul class="log">'+log.slice(0,10).map(function(r,i){
+        return '<li><div><b>'+r.s+'/'+r.d+'</b>'+(r.p?' <span>· '+r.p+' bpm</span>':'')+'<br><span>'+fmt(r.t)+'</span></div><button type="button" data-i="'+i+'" aria-label="Delete reading from '+fmt(r.t)+'">Delete</button></li>';
+      }).join('')+'</ul>';
+      out.innerHTML=html;
+    }
+    $('bp-add').addEventListener('click',function(){
+      var s=parseInt($('bp-s').value,10),d=parseInt($('bp-d').value,10),p=parseInt($('bp-p').value,10),err=$('bp-err');
+      if(!(s>=60&&s<=260&&d>=30&&d<=160)){err.textContent='Enter systolic (60 to 260) and diastolic (30 to 160) values.';return;}
+      if(s<=d){err.textContent='Systolic should be higher than diastolic. Check the numbers on your monitor.';return;}
+      err.textContent='';
+      log.unshift({s:s,d:d,p:(p>=30&&p<=220)?p:0,t:Date.now()});
+      log=log.slice(0,60);save();
+      $('bp-s').value='';$('bp-d').value='';$('bp-p').value='';$('bp-s').focus();
+      renderBP();
+    });
+    $('bp-out').addEventListener('click',function(e){
+      var i=e.target.getAttribute&&e.target.getAttribute('data-i');
+      if(i!==null&&i!==undefined&&e.target.tagName==='BUTTON'){log.splice(parseInt(i,10),1);save();renderBP();}
+    });
+    $('bp-clear').addEventListener('click',function(){log=[];save();renderBP();});
+    renderBP();
+  })();
+
+  var mb=document.getElementById('menuBtn'),lk=document.getElementById('links');
+  mb.addEventListener('click',function(){var o=lk.classList.toggle('open');mb.setAttribute('aria-expanded',o?'true':'false');});
+  lk.addEventListener('click',function(e){if(e.target.tagName==='A'){lk.classList.remove('open');mb.setAttribute('aria-expanded','false');}});
+})();
+</script>
+</body>
+</html>
