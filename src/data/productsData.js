@@ -96,7 +96,7 @@ export const productsData = [
     badge: '5s Fast Test',
     badgeColor: 'bg-teal-500/20 text-teal-300 border-teal-500/30',
     keySpecs: [
-      'Lightning 5-Second Quick Test Results',
+      'Lightning 5-Second Quick Test Results', 
       'Tiny Blood Sample Volume (< 0.8 µL)',
       'Multi-Day Trend Averages (7/14/28/60/90 Days)',
       'Speaking Voice Function & Audio Assistance',
