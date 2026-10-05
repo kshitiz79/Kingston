@@ -78,17 +78,7 @@ export default function BannerCarousel() {
       </div>
 
       {/* Auto-play progress bar */}
-      <div className="absolute bottom-0 left-0 h-[3px] w-full overflow-hidden">
-        <div
-          key={`${current}-${isPaused}`}
-          className={`h-full bg-violet-400 ${isPaused ? '' : ''}`}
-          style={
-            isPaused
-              ? { width: '100%', opacity: 0 }
-              : { animation: `ks-progress ${AUTO_PLAY_INTERVAL}ms linear forwards` }
-          }
-        />
-      </div>
+
 
       <style>{`
         @keyframes ks-progress {
