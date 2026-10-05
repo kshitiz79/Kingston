@@ -7,6 +7,7 @@ export const productsData = [
     tag: 'Flagship MWI Technology',
     subtitle: 'Intelligent compression & extra-large high contrast display for effortless daily readings.',
     image: '/Product_Pack/BB_A2.png',
+    hoverImage: '/Product_Pack/BB_A2 hover.png',
     badge: 'Bestseller',
     badgeColor: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
     keySpecs: [
@@ -35,6 +36,7 @@ export const productsData = [
     tag: 'Dual User Family Care',
     subtitle: 'Crisp digital display with dual-user tracking and lightweight portability.',
     image: '/Product_Pack/BB_A1.png',
+    hoverImage: '/Product_Pack/BB_A1 hover.png',
     badge: 'Dual User',
     badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
     keySpecs: [
@@ -62,6 +64,7 @@ export const productsData = [
     tag: 'Tubeless 360° Rigid Cuff',
     subtitle: 'No hoses, no tangled wires. Slip on the 360° cuff and read with USB-C rechargeable freedom.',
     image: '/Product_Pack/BB-A13.png',
+    hoverImage: '/Product_Pack/BB-A13 Hover.png',
     badge: 'Tubeless Wireless',
     badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
     keySpecs: [
@@ -89,6 +92,7 @@ export const productsData = [
     tag: 'Rapid 5-Second Diagnostics',
     subtitle: 'Ultra-fast 5s results with micro blood sample (<0.8 µL) and audio voice aid.',
     image: '/Product_Pack/Blood Glucose Meter.png',
+    hoverImage: '/Product_Pack/Blood Glucose Meter hover.png',
     badge: '5s Fast Test',
     badgeColor: 'bg-teal-500/20 text-teal-300 border-teal-500/30',
     keySpecs: [
@@ -117,6 +121,7 @@ export const productsData = [
     tag: 'Dual-Action Drug-Free Pain Relief',
     subtitle: 'Gentle bio-electric nerve stimulation paired with therapeutic heating for cramps and musculoskeletal pain.',
     image: '/Product_Pack/Wireless Heat Tens Unit F.png',
+    hoverImage: '/Product_Pack/Wireless Heat Tens Unit F hover.png',
     badge: 'TENS + Heat',
     badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
     keySpecs: [
@@ -143,6 +148,7 @@ export const productsData = [
     tag: '1-Second Clinical Precision',
     subtitle: 'Instant non-contact forehead temperature monitoring with color fever alarm.',
     image: '/Product_Pack/Thermometer_V-12.png',
+    hoverImage: '/Product_Pack/Infrared Thermometer Family Care Scene hover.png',
     badge: 'Instant Non-Contact',
     badgeColor: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
     keySpecs: [

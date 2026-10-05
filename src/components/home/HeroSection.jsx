@@ -154,6 +154,8 @@ export default function HeroSection() {
                     </span>
                   </div>
 
+
+
                   <div className="flex items-center gap-2">
                     <span className={`text-[11px] font-mono px-2 py-0.5 rounded-md ${simStatus === 'measuring'
                       ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
@@ -164,6 +166,8 @@ export default function HeroSection() {
                       {simStatus === 'measuring' ? 'INFLATING MWI...' : simStatus === 'complete' ? 'COMPLETE' : 'STANDBY'}
                     </span>
                   </div>
+
+
                 </div>
 
                 {/* Interactive Digital Segment Screen */}
@@ -222,20 +226,7 @@ export default function HeroSection() {
                         />
                       </svg>
 
-                      {/* Live scanning pulse status badge */}
-                      {simStatus === 'measuring' && (
-                        <div className="absolute right-1 top-0.5 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-500/50 text-[9px] font-mono text-emerald-300 backdrop-blur-sm shadow-lg shadow-emerald-950/50">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                          <span>LIVE PULSE WAVE</span>
-                        </div>
-                      )}
 
-                      {simStatus === 'complete' && (
-                        <div className="absolute right-1 top-0.5 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-violet-950/80 border border-violet-500/50 text-[9px] font-mono text-violet-300 backdrop-blur-sm">
-                          <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-                          <span>RHYTHM NORMAL</span>
-                        </div>
-                      )}
                     </div>
                   </div>
                 </div>

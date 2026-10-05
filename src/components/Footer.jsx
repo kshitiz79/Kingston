@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Heart, 
   ShieldCheck, 
@@ -152,6 +153,12 @@ export default function Footer() {
                 <a href="#dealer" className="hover:text-violet-300 transition-colors">
                   Find a Local Dealer
                 </a>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-violet-300 transition-colors flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-violet-400" />
+                  <span>Contact Us</span>
+                </Link>
               </li>
             </ul>
           </div>
