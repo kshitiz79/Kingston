@@ -15,14 +15,14 @@ export default function ProductShowcase() {
     { id: 'thermo', label: 'Thermometer' }
   ];
 
-  const filteredProducts = activeCategory === 'all' 
-    ? productsData 
+  const filteredProducts = activeCategory === 'all'
+    ? productsData
     : productsData.filter(p => p.category === activeCategory);
 
   return (
     <section id="products" className="py-20 lg:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Heading & Category Filters */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
@@ -43,11 +43,10 @@ export default function ProductShowcase() {
               <button
                 key={tab.id}
                 onClick={() => setActiveCategory(tab.id)}
-                className={`px-3.5 py-2 text-xs font-medium rounded-xl whitespace-nowrap transition-all ${
-                  activeCategory === tab.id
-                    ? 'bg-violet-600 text-white shadow-md'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
-                }`}
+                className={`px-3.5 py-2 text-xs font-medium rounded-xl whitespace-nowrap transition-all ${activeCategory === tab.id
+                  ? 'bg-violet-600 text-white shadow-md'
+                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+                  }`}
               >
                 {tab.label}
               </button>
@@ -58,12 +57,12 @@ export default function ProductShowcase() {
         {/* Product Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((prod) => (
-            <div 
+            <div
               key={prod.id}
               className="bg-[#0e0b20] border border-violet-900/40 rounded-3xl p-6 flex flex-col justify-between hover:border-violet-500/50 hover:bg-[#140f2e] transition-all duration-300 group shadow-xl hover:shadow-2xl hover:shadow-violet-950/40"
             >
               <div>
-                
+
                 {/* Top Badges */}
                 <div className="flex items-center justify-between gap-2 mb-4">
                   <span className="font-mono text-xs uppercase tracking-wider text-slate-400">
@@ -77,24 +76,24 @@ export default function ProductShowcase() {
                 {/* Product Pack Imagery with Exact Fit */}
                 <div className="w-full aspect-square flex items-center justify-center bg-[#090715] rounded-2xl border border-white/5 relative overflow-hidden group/img cursor-pointer">
                   {/* Default Image */}
-                  <img 
-                    src={prod.image} 
-                    alt={prod.name} 
-                    className={`w-full h-full drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)] transition-all duration-500 ease-in-out ${
-                      prod.id === 'fdbp-a14' ? 'object-contain p-6' : 'object-cover'
-                    } ${
-                      prod.hoverImage && prod.hoverImage !== prod.image
+                  <img
+                    src={prod.image}
+                    alt={prod.name}
+                    className={`w-full h-full drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)] transition-all duration-500 ease-in-out ${prod.id === 'fdbp-a14'
+                      ? 'object-contain p-0 scale-100'
+                      : 'object-cover'
+                      } ${prod.hoverImage && prod.hoverImage !== prod.image
                         ? 'group-hover/img:opacity-0 group-hover/img:scale-95'
                         : 'group-hover/img:scale-105'
-                    }`}
+                      }`}
                     loading="lazy"
                   />
 
                   {/* After-Hover Image from /Product_Pack/ - exactly fitted */}
                   {prod.hoverImage && prod.hoverImage !== prod.image && (
-                    <img 
-                      src={prod.hoverImage} 
-                      alt={`${prod.name} showcase`} 
+                    <img
+                      src={prod.hoverImage}
+                      alt={`${prod.name} showcase`}
                       className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/img:opacity-100 transition-all duration-500 ease-in-out"
                       loading="lazy"
                     />
@@ -167,8 +166,8 @@ export default function ProductShowcase() {
       {selectedProductModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
           <div className="bg-[#100d23] border border-violet-700/50 rounded-3xl max-w-2xl w-full p-6 sm:p-8 max-h-[90vh] overflow-y-auto shadow-2xl relative">
-            
-            <button 
+
+            <button
               onClick={() => setSelectedProductModal(null)}
               className="absolute top-5 right-5 p-2 rounded-full bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors z-20"
             >
@@ -178,12 +177,11 @@ export default function ProductShowcase() {
             {/* Modal Image & Header with View Toggle */}
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
               <div className="w-36 h-36 sm:w-44 sm:h-44 aspect-square bg-[#080614] rounded-2xl border border-white/10 flex items-center justify-center flex-shrink-0 relative overflow-hidden">
-                <img 
-                  src={modalImageView === 'hover' && selectedProductModal.hoverImage ? selectedProductModal.hoverImage : selectedProductModal.image} 
-                  alt={selectedProductModal.name} 
-                  className={`w-full h-full transition-all duration-300 ${
-                    modalImageView === 'hover' ? 'object-cover' : 'object-contain p-3'
-                  }`}
+                <img
+                  src={modalImageView === 'hover' && selectedProductModal.hoverImage ? selectedProductModal.hoverImage : selectedProductModal.image}
+                  alt={selectedProductModal.name}
+                  className={`w-full h-full transition-all duration-300 ${modalImageView === 'hover' ? 'object-cover' : 'object-contain p-3'
+                    }`}
                 />
               </div>
 
@@ -203,17 +201,15 @@ export default function ProductShowcase() {
                   <div className="mt-3 inline-flex items-center p-1 rounded-xl bg-[#090715] border border-white/10 text-[11px] font-mono">
                     <button
                       onClick={() => setModalImageView('pack')}
-                      className={`px-2.5 py-1 rounded-lg transition-colors ${
-                        modalImageView === 'pack' ? 'bg-violet-600 text-white font-semibold' : 'text-slate-400 hover:text-white'
-                      }`}
+                      className={`px-2.5 py-1 rounded-lg transition-colors ${modalImageView === 'pack' ? 'bg-violet-600 text-white font-semibold' : 'text-slate-400 hover:text-white'
+                        }`}
                     >
                       Packaging Box
                     </button>
                     <button
                       onClick={() => setModalImageView('hover')}
-                      className={`px-2.5 py-1 rounded-lg transition-colors ${
-                        modalImageView === 'hover' ? 'bg-violet-600 text-white font-semibold' : 'text-slate-400 hover:text-white'
-                      }`}
+                      className={`px-2.5 py-1 rounded-lg transition-colors ${modalImageView === 'hover' ? 'bg-violet-600 text-white font-semibold' : 'text-slate-400 hover:text-white'
+                        }`}
                     >
                       Studio Display
                     </button>
