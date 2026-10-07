@@ -10,7 +10,9 @@ import {
   ExternalLink,
   Activity,
   HeartPulse,
-  Sparkles
+  Sparkles,
+  ShoppingBag,
+  Store
 } from 'lucide-react';
 
 export default function Footer() {
@@ -29,19 +31,21 @@ export default function Footer() {
           {/* Brand & Canadian Identity */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <img 
-                src="/logoKingston_White.png" 
-                alt="Kingston Instruments" 
-                className="h-8 w-auto object-contain"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  const fb = document.getElementById('footer-logo-fallback');
-                  if (fb) fb.classList.remove('hidden');
-                }}
-              />
+              <Link to="/" className="group inline-block">
+                <img 
+                  src="/logoKingston_White.png" 
+                  alt="Kingston Instruments" 
+                  className="h-11 sm:h-12 md:h-13 lg:h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-[0_2px_14px_rgba(255,255,255,0.2)] brightness-105"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    const fb = document.getElementById('footer-logo-fallback');
+                    if (fb) fb.classList.remove('hidden');
+                  }}
+                />
+              </Link>
               <div id="footer-logo-fallback" className="hidden flex-col">
-                <span className="font-extrabold text-lg tracking-[0.2em] text-white">KINGSTON</span>
-                <span className="text-[10px] tracking-[0.35em] text-violet-300 font-mono">INSTRUMENTS</span>
+                <span className="font-extrabold text-xl md:text-2xl tracking-[0.2em] text-white">KINGSTON</span>
+                <span className="text-xs md:text-sm tracking-[0.35em] text-violet-300 font-mono">INSTRUMENTS</span>
               </div>
             </div>
 
@@ -77,40 +81,40 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <a href="#products" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
+                <Link to="/products?category=bp" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
                   <span>FDBP-A2 Monitor</span>
                   <span className="text-[10px] text-slate-500 group-hover:text-violet-400">(Large LCD)</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#products" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
+                <Link to="/products?category=bp" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
                   <span>FDBP-A1 Monitor</span>
                   <span className="text-[10px] text-slate-500 group-hover:text-violet-400">(Dual-User)</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#products" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
+                <Link to="/products?category=bp" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
                   <span>FDBP-A14 Monitor</span>
                   <span className="text-[10px] text-violet-400 font-mono">Tubeless</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#products" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
+                <Link to="/products?category=glucose" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
                   <span>GLM-72 Meter</span>
                   <span className="text-[10px] text-teal-400 font-mono">Glucose</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#products" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
+                <Link to="/products?category=tens" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
                   <span>FDES-106 Device</span>
                   <span className="text-[10px] text-amber-400 font-mono">TENS + Heat</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#products" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
+                <Link to="/products?category=thermo" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
                   <span>Infrared Thermometer</span>
                   <span className="text-[10px] text-slate-500">V-12 Clinical</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -118,46 +122,36 @@ export default function Footer() {
           {/* Interactive Tools & Care */}
           <div>
             <h3 className="text-xs font-mono uppercase tracking-widest text-slate-200 mb-4 font-semibold">
-              Health Tools & Tech
+              Health Tools & Company
             </h3>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <a href="#tools-bmi" className="hover:text-violet-300 transition-colors flex items-center gap-1.5">
+                <Link to="/health-tools" className="hover:text-violet-300 transition-colors flex items-center gap-1.5">
                   <Activity className="w-3.5 h-3.5 text-violet-400" />
-                  <span>BMI Health Calculator</span>
-                </a>
+                  <span>Interactive Health Calculators</span>
+                </Link>
               </li>
               <li>
-                <a href="#tools-bp" className="hover:text-violet-300 transition-colors flex items-center gap-1.5">
-                  <HeartPulse className="w-3.5 h-3.5 text-rose-400" />
-                  <span>Blood Pressure Logger</span>
-                </a>
+                <Link to="/where-to-buy" className="hover:text-violet-300 transition-colors flex items-center gap-1.5">
+                  <ShoppingBag className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Where to Buy (FB & Retail)</span>
+                </Link>
               </li>
               <li>
-                <a href="#tools-glu" className="hover:text-violet-300 transition-colors flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-teal-400" />
-                  <span>Glucose Unit Converter</span>
-                </a>
+                <Link to="/about" className="hover:text-violet-300 transition-colors">
+                  About Kingston Instruments
+                </Link>
               </li>
               <li>
-                <a href="#technology" className="hover:text-violet-300 transition-colors">
-                  Intelligent MWI Compression
-                </a>
-              </li>
-              <li>
-                <a href="#technology" className="hover:text-violet-300 transition-colors">
-                  Irregular Heartbeat (IHB)
-                </a>
-              </li>
-              <li>
-                <a href="#dealer" className="hover:text-violet-300 transition-colors">
-                  Find a Local Dealer
-                </a>
+                <Link to="/where-to-buy" className="hover:text-violet-300 transition-colors flex items-center gap-1.5">
+                  <Store className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Authorized Pharmacy Locator</span>
+                </Link>
               </li>
               <li>
                 <Link to="/contact" className="hover:text-violet-300 transition-colors flex items-center gap-1.5">
                   <Mail className="w-3.5 h-3.5 text-violet-400" />
-                  <span>Contact Us</span>
+                  <span>Contact Kitchener HQ</span>
                 </Link>
               </li>
             </ul>
@@ -171,13 +165,13 @@ export default function Footer() {
             <p className="text-xs text-slate-400 mb-3 leading-relaxed">
               Looking to stock Kingston diagnostic solutions in your clinic, pharmacy, or distribution network?
             </p>
-            <a 
-              href="#dealer"
+            <Link 
+              to="/where-to-buy"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-600/20 hover:bg-violet-600/30 text-violet-200 border border-violet-500/30 text-xs font-medium transition-colors"
             >
               <span>Partner Inquiry</span>
               <ArrowUpRight className="w-3 h-3" />
-            </a>
+            </Link>
 
             <div className="mt-5 pt-4 border-t border-white/5 space-y-1.5 text-xs text-slate-400">
               <div className="font-medium text-white">R-Biomeds Canada</div>
@@ -202,10 +196,10 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Use</a>
-            <a href="#" className="hover:text-white transition-colors">Warranty & Service</a>
-            <a href="#catalogue" className="hover:text-white transition-colors">Product Catalogue</a>
+            <Link to="/about" className="hover:text-white transition-colors">About Us</Link>
+            <Link to="/products" className="hover:text-white transition-colors">Product Catalogue</Link>
+            <Link to="/where-to-buy" className="hover:text-white transition-colors">Where to Buy</Link>
+            <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
           </div>
         </div>
 

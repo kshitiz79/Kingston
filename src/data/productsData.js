@@ -165,15 +165,183 @@ export const productsData = [
       'Display': 'Color-Coded Tri-State Backlight',
       'Modes': 'Forehead Body Mode & Object/Room Mode',
       'Memory': '32 Recent Measurements Memory'
-    }
+    },
+    msrp: 39.99,
+    fbPrice: 27.99,
+    savings: 'Save $12.00 (30% OFF)',
+    fbPromoBadge: 'FB Ad Special: Free Family Case',
+    fbMarketplaceUrl: 'https://www.facebook.com/marketplace'
   }
 ];
 
-export const dealersData = [
-  { name: 'Kingston Clinical Supply Hub', city: 'Kitchener', prov: 'ON', address: '63 Meadowridge St', type: 'Primary Distribution Center' },
-  { name: 'Guardian Health Pharmacy', city: 'Toronto', prov: 'ON', address: '482 Queen St W', type: 'Authorized Retailer' },
-  { name: 'MetroCare Diagnostics', city: 'Vancouver', prov: 'BC', address: '1120 Burrard St', type: 'Medical Device Partner' },
-  { name: 'Pharmacie Sante Pure', city: 'Montreal', prov: 'QC', address: '345 Rue Saint-Denis', type: 'Authorized Retailer' },
-  { name: 'Prairie Health Solutions', city: 'Calgary', prov: 'AB', address: '820 8th Ave SW', type: 'Regional Distributor' },
-  { name: 'Capital Medical Equipment', city: 'Ottawa', prov: 'ON', address: '250 Bank Street', type: 'Healthcare Supplier' }
+// Enrich existing products with pricing and FB marketplace details
+productsData[0].msrp = 69.99;
+productsData[0].fbPrice = 54.99;
+productsData[0].savings = 'Save $15.00 (21% OFF)';
+productsData[0].fbPromoBadge = 'FB Ad Special: Free Adapter + 2-Yr Warranty';
+productsData[0].fbMarketplaceUrl = 'https://www.facebook.com/marketplace';
+
+productsData[1].msrp = 54.99;
+productsData[1].fbPrice = 39.99;
+productsData[1].savings = 'Save $15.00 (27% OFF)';
+productsData[1].fbPromoBadge = 'FB Ad Special: Dual-Cuff Family Bundle';
+productsData[1].fbMarketplaceUrl = 'https://www.facebook.com/marketplace';
+
+productsData[2].msrp = 89.99;
+productsData[2].fbPrice = 69.99;
+productsData[2].savings = 'Save $20.00 (22% OFF)';
+productsData[2].fbPromoBadge = 'FB Ad Special: Free Hard-Shell Travel Case';
+productsData[2].fbMarketplaceUrl = 'https://www.facebook.com/marketplace';
+
+productsData[3].msrp = 44.99;
+productsData[3].fbPrice = 32.99;
+productsData[3].savings = 'Save $12.00 (27% OFF)';
+productsData[3].fbPromoBadge = 'FB Ad Special: 50 Free Test Strips + Lancets';
+productsData[3].fbMarketplaceUrl = 'https://www.facebook.com/marketplace';
+
+productsData[4].msrp = 64.99;
+productsData[4].fbPrice = 47.99;
+productsData[4].savings = 'Save $17.00 (26% OFF)';
+productsData[4].fbPromoBadge = 'FB Ad Special: 4 Reusable Gel Hydro-Pads';
+productsData[4].fbMarketplaceUrl = 'https://www.facebook.com/marketplace';
+
+export const retailersData = [
+  {
+    id: 'ret-1',
+    name: 'Kingston Clinical Supply Hub (Headquarters)',
+    category: 'Primary Distribution Center',
+    city: 'Kitchener',
+    prov: 'ON',
+    postal: 'N2P 0E2',
+    address: '63 Meadowridge St',
+    phone: '+1 519-998-6325',
+    hours: 'Mon - Fri: 8:30 AM - 5:30 PM',
+    inStock: ['FDBP-A2', 'FDBP-A1', 'FDBP-A14', 'GLM-72', 'FDES-106', 'V-12'],
+    status: 'In Stock (Direct Depot)',
+    badge: 'Headquarters & Direct Pickup',
+    mapUrl: 'https://www.google.com/maps?q=63+Meadowridge+St,+Kitchener,+ON+N2P+0E2,+Canada'
+  },
+  {
+    id: 'ret-2',
+    name: 'Guardian Health Pharmacy & Medical Supply',
+    category: 'Retail Pharmacy',
+    city: 'Toronto',
+    prov: 'ON',
+    postal: 'M5V 2B3',
+    address: '482 Queen St W',
+    phone: '+1 416-504-8900',
+    hours: 'Mon - Sat: 9:00 AM - 8:00 PM | Sun: 10:00 AM - 6:00 PM',
+    inStock: ['FDBP-A2', 'FDBP-A1', 'GLM-72', 'V-12'],
+    status: 'In Stock',
+    badge: 'Premier Pharmacy Partner',
+    mapUrl: 'https://www.google.com/maps?q=482+Queen+St+W,+Toronto,+ON+Canada'
+  },
+  {
+    id: 'ret-3',
+    name: 'Grand River Medical Arts Pharmacy',
+    category: 'Retail Pharmacy',
+    city: 'Waterloo',
+    prov: 'ON',
+    postal: 'N2L 3V9',
+    address: '150 University Ave W',
+    phone: '+1 519-885-3200',
+    hours: 'Mon - Fri: 9:00 AM - 7:00 PM | Sat: 10:00 AM - 4:00 PM',
+    inStock: ['FDBP-A2', 'FDBP-A14', 'GLM-72', 'FDES-106'],
+    status: 'In Stock',
+    badge: 'Regional Medical Partner',
+    mapUrl: 'https://www.google.com/maps?q=150+University+Ave+W,+Waterloo,+ON+Canada'
+  },
+  {
+    id: 'ret-4',
+    name: 'MetroCare Diagnostics & Health Depot',
+    category: 'Medical Device Partner',
+    city: 'Vancouver',
+    prov: 'BC',
+    postal: 'V6Z 2S8',
+    address: '1120 Burrard St',
+    phone: '+1 604-682-2344',
+    hours: 'Mon - Sat: 8:30 AM - 6:30 PM',
+    inStock: ['FDBP-A2', 'FDBP-A14', 'GLM-72', 'V-12', 'FDES-106'],
+    status: 'In Stock',
+    badge: 'West Coast Specialist',
+    mapUrl: 'https://www.google.com/maps?q=1120+Burrard+St,+Vancouver,+BC+Canada'
+  },
+  {
+    id: 'ret-5',
+    name: 'Pharmacie Santé Pure & Soins Cliniques',
+    category: 'Retail Pharmacy',
+    city: 'Montreal',
+    prov: 'QC',
+    postal: 'H2X 3J8',
+    address: '345 Rue Saint-Denis',
+    phone: '+1 514-842-7890',
+    hours: 'Lun - Ven: 8:30 - 20:00 | Sam - Dim: 10:00 - 18:00',
+    inStock: ['FDBP-A2', 'FDBP-A1', 'GLM-72', 'V-12'],
+    status: 'In Stock',
+    badge: 'Quebec Flagship Partner',
+    mapUrl: 'https://www.google.com/maps?q=345+Rue+Saint-Denis,+Montreal,+QC+Canada'
+  },
+  {
+    id: 'ret-6',
+    name: 'Prairie Health Solutions & Diagnostics',
+    category: 'Regional Distributor',
+    city: 'Calgary',
+    prov: 'AB',
+    postal: 'T2P 1B4',
+    address: '820 8th Ave SW',
+    phone: '+1 403-264-5511',
+    hours: 'Mon - Fri: 8:00 AM - 6:00 PM | Sat: 10:00 AM - 5:00 PM',
+    inStock: ['FDBP-A2', 'FDBP-A14', 'GLM-72', 'FDES-106', 'V-12'],
+    status: 'In Stock',
+    badge: 'Alberta Hub',
+    mapUrl: 'https://www.google.com/maps?q=820+8th+Ave+SW,+Calgary,+AB+Canada'
+  },
+  {
+    id: 'ret-7',
+    name: 'Capital Medical Equipment & Healthcare Center',
+    category: 'Healthcare Supplier',
+    city: 'Ottawa',
+    prov: 'ON',
+    postal: 'K2P 1X6',
+    address: '250 Bank Street',
+    phone: '+1 613-233-8410',
+    hours: 'Mon - Sat: 9:00 AM - 7:00 PM',
+    inStock: ['FDBP-A2', 'FDBP-A1', 'GLM-72', 'V-12'],
+    status: 'In Stock',
+    badge: 'National Capital Partner',
+    mapUrl: 'https://www.google.com/maps?q=250+Bank+Street,+Ottawa,+ON+Canada'
+  },
+  {
+    id: 'ret-8',
+    name: 'Credit Valley Community Pharmacy',
+    category: 'Retail Pharmacy',
+    city: 'Mississauga',
+    prov: 'ON',
+    postal: 'L5M 2N1',
+    address: '2200 Eglinton Ave W',
+    phone: '+1 905-813-1100',
+    hours: 'Mon - Fri: 8:30 AM - 9:00 PM | Sat - Sun: 9:00 AM - 6:00 PM',
+    inStock: ['FDBP-A2', 'FDBP-A14', 'GLM-72', 'V-12'],
+    status: 'In Stock',
+    badge: 'GTA Western Partner',
+    mapUrl: 'https://www.google.com/maps?q=2200+Eglinton+Ave+W,+Mississauga,+ON+Canada'
+  },
+  {
+    id: 'ret-9',
+    name: 'Edmonton Clinical Home Health Mart',
+    category: 'Medical Supply Store',
+    city: 'Edmonton',
+    prov: 'AB',
+    postal: 'T5J 3S9',
+    address: '10180 101 St NW',
+    phone: '+1 780-428-1234',
+    hours: 'Mon - Fri: 9:00 AM - 6:00 PM | Sat: 10:00 AM - 4:00 PM',
+    inStock: ['FDBP-A2', 'GLM-72', 'FDES-106', 'V-12'],
+    status: 'In Stock',
+    badge: 'Northern Alberta Depot',
+    mapUrl: 'https://www.google.com/maps?q=10180+101+St+NW,+Edmonton,+AB+Canada'
+  }
 ];
+
+// Keep backward compatibility
+export const dealersData = retailersData;

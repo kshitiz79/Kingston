@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Check, Info, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Check, Info, MapPin, ShoppingBag } from 'lucide-react';
 import { productsData } from '../../data/productsData';
 
 export default function ProductShowcase() {
@@ -147,13 +148,14 @@ export default function ProductShowcase() {
                   <span>View Specifications</span>
                 </button>
 
-                <a
-                  href="#dealer"
-                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-colors"
-                  title="Find Dealer for this item"
+                <Link
+                  to={`/where-to-buy?product=${prod.id}`}
+                  className="py-2.5 px-3.5 rounded-xl bg-violet-600/20 hover:bg-violet-600/30 text-violet-200 border border-violet-500/30 transition-colors flex items-center gap-1.5 text-xs font-medium"
+                  title="Where to Buy (FB & Retail)"
                 >
-                  <MapPin className="w-4 h-4 text-violet-300" />
-                </a>
+                  <ShoppingBag className="w-3.5 h-3.5 text-violet-300" />
+                  <span>Buy</span>
+                </Link>
               </div>
 
             </div>
@@ -243,13 +245,14 @@ export default function ProductShowcase() {
               >
                 Close
               </button>
-              <a
-                href="#dealer"
+              <Link
+                to={`/where-to-buy?product=${selectedProductModal.id}`}
                 onClick={() => setSelectedProductModal(null)}
-                className="px-5 py-2 rounded-xl bg-white text-[#080711] text-xs font-semibold hover:bg-violet-100 transition-colors"
+                className="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold transition-colors flex items-center gap-1.5 shadow-md shadow-violet-600/30"
               >
-                Inquire With Dealer
-              </a>
+                <ShoppingBag className="w-3.5 h-3.5" />
+                <span>Buy Now (FB & Retail)</span>
+              </Link>
             </div>
 
           </div>

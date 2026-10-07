@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, Heart, Droplet, AlertCircle, Trash2, Info } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import {
+  Activity,
+  Heart,
+  Droplet,
+  AlertCircle,
+  Trash2,
+  Info,
+  BookOpen,
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle2
+} from 'lucide-react';
+import HealthReadingGuide from '../health/HealthReadingGuide';
 
-export default function HealthToolsSuite() {
-  const [activeTool, setActiveTool] = useState('bmi');
+export default function HealthToolsSuite({ showGuide = true, initialTool = 'bmi' }) {
+  const [activeTool, setActiveTool] = useState(initialTool);
+  const [guideCategory, setGuideCategory] = useState('bp');
   
   // BMI Tool State
   const [bmiUnit, setBmiUnit] = useState('metric');
@@ -138,13 +152,13 @@ export default function HealthToolsSuite() {
         
         <div className="max-w-2xl mb-12">
           <span className="text-xs font-mono uppercase tracking-widest text-violet-400">
-            Interactive Wellness Suite
+            Interactive Clinical Health Suite
           </span>
           <h2 className="text-3xl sm:text-4xl font-medium text-white tracking-tight mt-1">
-            Tools you can use today.
+            Tools & Clinical Guides you can use today.
           </h2>
           <p className="text-slate-400 text-sm sm:text-base mt-2">
-            Free, private calculators and logging tools. Your medical numbers stay securely inside your browser and never leave your device.
+            Free, private calculators, trend loggers, and educational reading guides. Your medical numbers stay securely inside your browser and never leave your device.
           </p>
         </div>
 
@@ -154,8 +168,9 @@ export default function HealthToolsSuite() {
             
             {/* Tool Selection Sidebar */}
             <div className="lg:col-span-4 p-4 sm:p-6 bg-[#090716] space-y-2">
-              <div className="text-[11px] font-mono uppercase text-slate-500 px-3 py-1">
-                Select Tool
+              <div className="text-[11px] font-mono uppercase text-slate-500 px-3 py-1 flex items-center justify-between">
+                <span>Select Health Tool</span>
+                {showGuide && <span className="text-[9px] text-violet-400 font-bold">GUIDES INCLUDED</span>}
               </div>
 
               <button
@@ -208,6 +223,36 @@ export default function HealthToolsSuite() {
                   <div className="text-xs text-slate-400 mt-0.5">Convert mmol/L & mg/dL with target guide</div>
                 </div>
               </button>
+
+              {/* Health Reading & Terminology Guide Tab (Exclusively in Health Tools Section) */}
+              {showGuide && (
+                <div className="pt-2 border-t border-violet-900/40">
+                  <button
+                    onClick={() => {
+                      setActiveTool('guide');
+                      setGuideCategory('bp');
+                    }}
+                    className={`w-full text-left p-3.5 rounded-2xl flex items-start gap-3 transition-all ${
+                      activeTool === 'guide'
+                        ? 'bg-gradient-to-r from-violet-900/50 to-indigo-900/50 border border-violet-500/50 shadow-lg text-white'
+                        : 'text-slate-300 hover:text-white hover:bg-white/5 border border-violet-900/30'
+                    }`}
+                  >
+                    <div className={`p-2 rounded-xl ${activeTool === 'guide' ? 'bg-violet-600 text-white' : 'bg-violet-900/40 text-violet-300'}`}>
+                      <BookOpen className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold flex items-center gap-1.5">
+                        <span>Reading & Terminology Guide</span>
+                        <span className="text-[9px] font-mono bg-violet-500/20 text-violet-300 px-1.5 py-0.5 rounded border border-violet-500/30">NEW</span>
+                      </div>
+                      <div className="text-xs text-slate-400 mt-0.5">
+                        How to read BP & Glucose + clinical glossary
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Tool Interactive Panel */}
@@ -344,9 +389,46 @@ export default function HealthToolsSuite() {
               {activeTool === 'bp' && (
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-white">Blood Pressure Logger & Trends</h3>
-                    <span className="text-xs font-mono text-slate-400">Stored on your device</span>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">Blood Pressure Logger & Trends</h3>
+                      <span className="text-xs font-mono text-slate-400">Stored privately on your device</span>
+                    </div>
+
+                    {showGuide && (
+                      <button
+                        onClick={() => {
+                          setActiveTool('guide');
+                          setGuideCategory('bp');
+                        }}
+                        className="px-3 py-1.5 rounded-xl bg-violet-950/60 hover:bg-violet-900/60 text-violet-300 border border-violet-800/40 text-xs font-medium transition-colors flex items-center gap-1.5"
+                      >
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>How to Read BP Guide</span>
+                      </button>
+                    )}
                   </div>
+
+                  {/* Inline Explainer Banner */}
+                  {showGuide && (
+                    <div className="p-3.5 rounded-2xl bg-[#120e29] border border-violet-800/40 flex items-center justify-between gap-3 text-xs">
+                      <div className="flex items-center gap-2">
+                        <Heart className="w-4 h-4 text-rose-400 flex-shrink-0" />
+                        <span className="text-slate-300">
+                          Need help understanding <strong>SYS (Systolic)</strong>, <strong>DIA (Diastolic)</strong>, or <strong>mmHg</strong>?
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setActiveTool('guide');
+                          setGuideCategory('bp');
+                        }}
+                        className="text-violet-300 hover:text-white font-semibold text-[11px] whitespace-nowrap flex items-center gap-1"
+                      >
+                        <span>View Terminology</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                  )}
 
                   <form onSubmit={handleAddBpLog} className="space-y-4">
                     <div className="grid grid-cols-3 gap-3">
@@ -355,7 +437,7 @@ export default function HealthToolsSuite() {
                           SYS (mmHg)
                         </label>
                         <input 
-                          type="number"
+                          type="number" 
                           value={bpSys}
                           onChange={(e) => setBpSys(e.target.value)}
                           placeholder="120"
@@ -367,7 +449,7 @@ export default function HealthToolsSuite() {
                           DIA (mmHg)
                         </label>
                         <input 
-                          type="number"
+                          type="number" 
                           value={bpDia}
                           onChange={(e) => setBpDia(e.target.value)}
                           placeholder="80"
@@ -379,7 +461,7 @@ export default function HealthToolsSuite() {
                           Pulse (bpm)
                         </label>
                         <input 
-                          type="number"
+                          type="number" 
                           value={bpPulse}
                           onChange={(e) => setBpPulse(e.target.value)}
                           placeholder="72"
@@ -502,9 +584,46 @@ export default function HealthToolsSuite() {
               {activeTool === 'glucose' && (
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-white">Blood Glucose Unit Converter</h3>
-                    <span className="text-xs font-mono text-teal-400">1 mmol/L ≈ 18 mg/dL</span>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">Blood Glucose Unit Converter</h3>
+                      <span className="text-xs font-mono text-teal-400">1 mmol/L ≈ 18.016 mg/dL</span>
+                    </div>
+
+                    {showGuide && (
+                      <button
+                        onClick={() => {
+                          setActiveTool('guide');
+                          setGuideCategory('glucose');
+                        }}
+                        className="px-3 py-1.5 rounded-xl bg-teal-950/60 hover:bg-teal-900/60 text-teal-300 border border-teal-800/40 text-xs font-medium transition-colors flex items-center gap-1.5"
+                      >
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>How to Read Glucose Guide</span>
+                      </button>
+                    )}
                   </div>
+
+                  {/* Inline Explainer Banner */}
+                  {showGuide && (
+                    <div className="p-3.5 rounded-2xl bg-[#091520] border border-teal-800/40 flex items-center justify-between gap-3 text-xs">
+                      <div className="flex items-center gap-2">
+                        <Droplet className="w-4 h-4 text-teal-400 flex-shrink-0" />
+                        <span className="text-slate-300">
+                          Wondering what <strong>mmol/L vs. mg/dL</strong>, <strong>Fasting</strong>, or <strong>Postprandial</strong> mean?
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => {
+                          setActiveTool('guide');
+                          setGuideCategory('glucose');
+                        }}
+                        className="text-teal-300 hover:text-white font-semibold text-[11px] whitespace-nowrap flex items-center gap-1"
+                      >
+                        <span>View Terminology</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                  )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="p-5 rounded-2xl bg-[#090715] border border-teal-500/20 space-y-2">
@@ -512,7 +631,7 @@ export default function HealthToolsSuite() {
                         Canadian Standard (mmol/L)
                       </label>
                       <input 
-                        type="number"
+                        type="number" 
                         step="0.1"
                         value={glucMmol}
                         onChange={(e) => handleMmolChange(e.target.value)}
@@ -526,7 +645,7 @@ export default function HealthToolsSuite() {
                         US & International (mg/dL)
                       </label>
                       <input 
-                        type="number"
+                        type="number" 
                         value={glucMg}
                         onChange={(e) => handleMgChange(e.target.value)}
                         className="w-full h-14 rounded-xl bg-[#06040e] border border-teal-500/30 px-4 text-2xl font-mono font-bold text-white focus:outline-none focus:border-teal-400"
@@ -557,6 +676,13 @@ export default function HealthToolsSuite() {
                     </div>
                   </div>
 
+                </div>
+              )}
+
+              {/* 4. CLINICAL READING & TERMINOLOGY GUIDE (EXCLUSIVELY IN HEALTH TOOLS) */}
+              {activeTool === 'guide' && showGuide && (
+                <div className="space-y-4">
+                  <HealthReadingGuide defaultCategory={guideCategory} />
                 </div>
               )}
 
