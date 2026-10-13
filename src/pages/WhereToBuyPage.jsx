@@ -254,7 +254,7 @@ export default function WhereToBuyPage() {
 
                 <div className="flex flex-wrap items-center gap-3">
                   <a
-                    href="https://www.facebook.com"
+                    href="https://www.facebook.com/share/19UTSnwfi4/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-5 py-3 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-semibold shadow-lg shadow-blue-600/30 transition-all flex items-center gap-2"
@@ -765,7 +765,7 @@ export default function WhereToBuyPage() {
                         rows={2}
                         value={formData.notes}
                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        placeholder="e.g. Leave at front porch, buzzer code #204, or saw FB ad about FDBP-A14"
+                        placeholder="e.g. Leave at front porch, buzzer code #204, or saw FB ad about FDBP-A13"
                         className="w-full p-3 rounded-xl bg-[#080616] border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-violet-500"
                       />
                     </div>

@@ -181,7 +181,7 @@ export default function BloodGlucoseSimulator() {
       <div className="flex items-center justify-between mb-3 px-1 text-xs font-mono text-slate-400">
         <span className="flex items-center gap-1.5 text-teal-300 font-semibold text-[11px]">
           <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-          GLM-72 Rapid 5s
+          HL-568 Rapid 5s
         </span>
         <button
           onClick={() => setSoundEnabled(!soundEnabled)}
@@ -221,7 +221,7 @@ export default function BloodGlucoseSimulator() {
         <div className="text-center mb-2">
           <div className="text-[12px] font-extrabold tracking-widest text-white flex items-center justify-center gap-1">
             <span>KINGSTON</span>
-            <span className="text-[9px] font-mono text-teal-400 bg-teal-950/60 px-1.5 py-0.2 rounded border border-teal-800/40">GLM-72</span>
+            <span className="text-[9px] font-mono text-teal-400 bg-teal-950/60 px-1.5 py-0.2 rounded border border-teal-800/40">HL-568</span>
           </div>
           <div className="text-[8px] font-mono tracking-wider text-slate-400">PRECISION GLUCOSE MONITOR</div>
         </div>

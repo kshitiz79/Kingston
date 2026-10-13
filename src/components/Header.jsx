@@ -49,14 +49,14 @@ export default function Header() {
   const productCategories = [
     {
       title: 'Blood Pressure Monitors',
-      desc: 'FDBP-A2, FDBP-A1 & Tubeless A14',
+      desc: 'FDBP-A1, FDBP-A2 & FDBP-A13',
       icon: HeartPulse,
       href: '/products?category=bp',
       color: 'text-violet-400 bg-violet-500/10'
     },
     {
       title: 'Blood Glucose Meter',
-      desc: 'GLM-72 Rapid 5s with Voice Aid',
+      desc: 'HL-568 Rapid 5s with Voice Aid',
       icon: Droplet,
       href: '/products?category=glucose',
       color: 'text-teal-400 bg-teal-500/10'
@@ -291,15 +291,15 @@ export default function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2.5 bg-violet-950/30 border border-violet-900/30 rounded-xl text-xs text-slate-200 hover:text-white"
                 >
-                  <div className="font-semibold">FDBP-A14</div>
-                  <div className="text-[10px] text-slate-400">Tubeless 360° Cuff</div>
+                  <div className="font-semibold">FDBP-A13</div>
+                  <div className="text-[10px] text-slate-400">LED Display Model</div>
                 </Link>
                 <Link
                   to="/products?category=glucose"
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2.5 bg-violet-950/30 border border-violet-900/30 rounded-xl text-xs text-slate-200 hover:text-white"
                 >
-                  <div className="font-semibold">GLM-72</div>
+                  <div className="font-semibold">HL-568</div>
                   <div className="text-[10px] text-slate-400">Glucose Meter</div>
                 </Link>
                 <Link

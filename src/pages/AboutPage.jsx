@@ -288,7 +288,7 @@ export default function AboutPage() {
 
                 <div className="p-3 rounded-2xl bg-[#100d26] border border-white/5 space-y-1">
                   <div className="font-semibold text-teal-300">Spoken Voice Feedback for Seniors</div>
-                  <div className="text-slate-400">Our GLM-72 Glucose Meter speaks readings aloud, making self-care accessible for patients with low vision.</div>
+                  <div className="text-slate-400">Our HL-568 Glucose Meter speaks readings aloud, making self-care accessible for patients with low vision.</div>
                 </div>
 
                 <div className="p-3 rounded-2xl bg-[#100d26] border border-white/5 space-y-1">

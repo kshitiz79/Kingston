@@ -80,7 +80,7 @@ export default function ProductShowcase() {
                   <img
                     src={prod.image}
                     alt={prod.name}
-                    className={`w-full h-full drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)] transition-all duration-500 ease-in-out ${prod.id === 'fdbp-a14'
+                    className={`w-full h-full drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)] transition-all duration-500 ease-in-out ${prod.id === 'fdbp-a13' || prod.id === 'fdbp-a14'
                       ? 'object-contain p-0 scale-100'
                       : 'object-cover'
                       } ${prod.hoverImage && prod.hoverImage !== prod.image

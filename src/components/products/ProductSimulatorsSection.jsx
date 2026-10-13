@@ -34,7 +34,7 @@ export default function ProductSimulatorsSection({ initialDevice = 'bp' }) {
   }, [simParam]);
 
   const bpProduct = productsData.find(p => p.id === 'fdbp-a2') || productsData[0];
-  const glucoseProduct = productsData.find(p => p.id === 'glm-72') || productsData[3];
+  const glucoseProduct = productsData.find(p => p.id === 'hl-568' || p.id === 'glm-72') || productsData[3];
 
   const currentProduct = activeDevice === 'bp' ? bpProduct : glucoseProduct;
 
@@ -91,7 +91,7 @@ export default function ProductSimulatorsSection({ initialDevice = 'bp' }) {
               }`}
             >
               <Droplet className="w-4 h-4 text-teal-300" />
-              <span>Glucose Meter (GLM-72)</span>
+              <span>Glucose Meter (HL-568)</span>
             </button>
           </div>
         </div>

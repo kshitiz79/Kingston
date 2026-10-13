@@ -506,7 +506,7 @@ export default function HealthReadingGuide({ defaultCategory = 'bp' }) {
 
               <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 space-y-1">
                 <span className="font-mono text-teal-400 font-bold text-[11px]">4. Micro 0.8 µL Sample</span>
-                <p className="text-slate-300">Kingston GLM-72 requires only a pinhead-sized 0.8 µL droplet. Let the strip automatically sip the sample via capillary action.</p>
+                <p className="text-slate-300">Kingston HL-568 requires only a pinhead-sized 0.8 µL droplet. Let the strip automatically sip the sample via capillary action.</p>
               </div>
 
               <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5 space-y-1">

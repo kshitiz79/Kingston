@@ -10,9 +10,12 @@ import AboutPage from './pages/AboutPage';
 import HealthToolsPage from './pages/HealthToolsPage';
 import ContactPage from './pages/ContactPage';
 
+import FirstTimeLoader from './components/FirstTimeLoader';
+
 function App() {
   return (
     <BrowserRouter>
+      <FirstTimeLoader />
       <ScrollToTop />
       <div className="flex flex-col min-h-screen bg-[#080711] text-[#edeaf8]">
         <Header />
