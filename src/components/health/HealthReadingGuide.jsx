@@ -158,28 +158,28 @@ export default function HealthReadingGuide({ defaultCategory = 'bp' }) {
   );
 
   return (
-    <div className="bg-[#0e0b20] border border-violet-900/50 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl space-y-8">
+    <div className="bg-[#0e0b20] border border-violet-900/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl space-y-6 sm:space-y-8">
       
       {/* Header & Category Switcher */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-violet-900/40">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 sm:pb-6 border-b border-violet-900/40">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/30 text-xs font-mono text-violet-300 mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/30 text-[11px] font-mono text-violet-300 mb-2 sm:mb-3">
             <BookOpen className="w-3.5 h-3.5 text-violet-400" />
             <span>CLINICAL EDUCATION & GLOSSARY (HEALTH TOOLS EXCLUSIVE)</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-white tracking-tight">
             How to Read Your Readings & Terminology Guide
           </h2>
-          <p className="text-slate-300 text-sm mt-2 max-w-2xl leading-relaxed">
+          <p className="text-slate-300 text-xs sm:text-sm mt-1.5 max-w-2xl leading-relaxed">
             Understand exactly what the numbers on your diagnostic devices mean, master accurate self-monitoring protocols, and demystify clinical cardiovascular and glycemic terms.
           </p>
         </div>
 
         {/* Category Tabs: BP vs Glucose */}
-        <div className="flex items-center p-1.5 rounded-2xl bg-[#080614] border border-violet-900/60 shadow-lg self-start md:self-auto">
+        <div className="flex items-center p-1 sm:p-1.5 rounded-2xl bg-[#080614] border border-violet-900/60 shadow-lg self-start sm:self-auto w-full sm:w-auto">
           <button
             onClick={() => setActiveCategory('bp')}
-            className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all ${
+            className={`flex-1 sm:flex-initial px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
               activeCategory === 'bp'
                 ? 'bg-rose-600 text-white shadow-lg shadow-rose-600/30'
                 : 'text-slate-400 hover:text-white'
@@ -191,7 +191,7 @@ export default function HealthReadingGuide({ defaultCategory = 'bp' }) {
 
           <button
             onClick={() => setActiveCategory('glucose')}
-            className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all ${
+            className={`flex-1 sm:flex-initial px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
               activeCategory === 'glucose'
                 ? 'bg-teal-600 text-white shadow-lg shadow-teal-600/30'
                 : 'text-slate-400 hover:text-white'
@@ -256,16 +256,16 @@ export default function HealthReadingGuide({ defaultCategory = 'bp' }) {
 
           {/* Clinical Classification Stages Table (Hypertension Canada & AHA) */}
           <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h3 className="text-base font-semibold text-white flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+              <h3 className="text-sm sm:text-base font-semibold text-white flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                 <span>Hypertension Canada & AHA Clinical Classification Categories</span>
               </h3>
-              <span className="text-xs font-mono text-slate-400">Adult Standard (At Rest)</span>
+              <span className="text-[11px] sm:text-xs font-mono text-slate-400">Adult Standard (At Rest)</span>
             </div>
 
             <div className="overflow-x-auto rounded-2xl border border-violet-900/40 bg-[#090716]">
-              <table className="w-full text-left text-xs">
+              <table className="w-full text-left text-xs min-w-[560px]">
                 <thead className="bg-[#120e29] border-b border-violet-900/40 text-[11px] font-mono uppercase text-slate-400">
                   <tr>
                     <th className="p-3.5">Blood Pressure Category</th>
@@ -418,16 +418,16 @@ export default function HealthReadingGuide({ defaultCategory = 'bp' }) {
 
           {/* Clinical Glycemic Targets Table (Diabetes Canada & WHO) */}
           <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h3 className="text-base font-semibold text-white flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-teal-400" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+              <h3 className="text-sm sm:text-base font-semibold text-white flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-teal-400 flex-shrink-0" />
                 <span>Clinical Glycemic Targets (Diabetes Canada Clinical Practice Guidelines)</span>
               </h3>
-              <span className="text-xs font-mono text-slate-400">Plasma-Calibrated</span>
+              <span className="text-[11px] sm:text-xs font-mono text-slate-400">Plasma-Calibrated</span>
             </div>
 
             <div className="overflow-x-auto rounded-2xl border border-teal-900/40 bg-[#090716]">
-              <table className="w-full text-left text-xs">
+              <table className="w-full text-left text-xs min-w-[560px]">
                 <thead className="bg-[#0b1722] border-b border-teal-900/40 text-[11px] font-mono uppercase text-slate-400">
                   <tr>
                     <th className="p-3.5">Testing State & Timing</th>

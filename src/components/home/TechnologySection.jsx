@@ -27,15 +27,14 @@ export default function TechnologySection() {
       id: 'mwi',
       category: 'cardio',
       icon: Sliders,
-      badge: 'Up-Curve Hemodynamics',
-      badgeColor: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
+
+
       title: 'MWI Technology',
       subtitle: 'Measurement While Inflating',
       summary: 'Measures blood pressure gently on the inflation up-curve, eliminating painful cuff over-tightening and delivering accurate readings up to 40% faster.',
       desc: 'Conventional blood pressure monitors inflate the cuff to excessively high pressures (often exceeding 180–200 mmHg) before slowly deflating to capture readings—causing arm pinching, numbness, and transient stress spikes. Kingston’s proprietary MWI (Measurement While Inflating) technology analyzes arterial oscillation harmonics in real time as the cuff gently inflates, capturing systolic and diastolic metrics in ~25 seconds with clinical ±3 mmHg precision.',
       image: '/images/2.png',
-      stat: '40% Faster',
-      statLabel: 'Up-curve measurement cycle',
+
       keyPoints: [
         'Gentle up-curve inflation prevents arm bruising & numbness',
         'Reduces "White-Coat" stress spikes triggered by painful squeezing',
@@ -62,15 +61,14 @@ export default function TechnologySection() {
       id: 'tens-women',
       category: 'womens-health',
       icon: Zap,
-      badge: "Women's Health & Pelvic Relief",
-      badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+
+
       title: 'Dual-Action TENS + Heat Therapy',
       subtitle: 'Electrothermal Neuro-Modulation for Women’s Care',
       summary: 'Synergy of transcutaneous nerve stimulation and targeted soothing thermal heat to naturally block menstrual cramps and deep pelvic pain without medication.',
       desc: 'Engineered specifically for women’s wellness, menstrual dysmenorrhea, endometriosis cramps, and lumbar tension, Kingston’s FDES technology merges bi-phasic TENS neuro-stimulation with gentle thermal therapy (up to 43°C). Based on the Gate Control Theory of pain, high-frequency micro-pulses stimulate A-beta sensory nerve fibers, closing the neural gate in the spinal cord to intercept nociceptive pain signals before they reach the brain—all while therapeutic warmth dilates pelvic micro-vessels to relax tight uterine smooth muscles.',
       image: '/images/4.png',
-      stat: '100% Drug-Free',
-      statLabel: 'Zero NSAID dependency or GI side effects',
+
       keyPoints: [
         'Targeted for primary dysmenorrhea, menstrual cramps & pelvic tension',
         'Gate Control Theory blocks pain signals at the spinal dorsal horn',
@@ -95,15 +93,13 @@ export default function TechnologySection() {
       id: 'ihb',
       category: 'cardio',
       icon: Heart,
-      badge: 'Arrhythmia Surveillance',
-      badgeColor: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
+
       title: 'IHB Arrhythmia Alert & WHO Profiling',
       subtitle: 'Sub-Millisecond Heart Rhythm Analysis',
       summary: 'Integrated clinical sensor algorithms continuously analyze arterial pulses, alerting you instantly if an irregular heartbeat or potential arrhythmia is detected.',
       desc: 'During every blood pressure measurement, Kingston’s high-precision sensor tracks the intervals between consecutive arterial pulses. If a variation greater than 25% from the median pulse interval is detected across the measurement cycle, the IHB alert icon illuminates alongside the reading. Combined with WHO 6-stage color classification, patients receive immediate visual context on their cardiac rhythm and pressure stages.',
       image: '/images/3.png',
-      stat: 'Sub-ms',
-      statLabel: 'Pulse wave interval precision',
+
       keyPoints: [
         'Detects premature ventricular contractions & irregular heartbeats',
         'Immediate visual warning for timely clinical consultation',
@@ -128,15 +124,13 @@ export default function TechnologySection() {
       id: 'cuff',
       category: 'cardio',
       icon: Layers,
-      badge: 'Sensor Ergonomics',
-      badgeColor: 'bg-teal-500/20 text-teal-300 border-teal-500/30',
+
       title: '360° Rigid Circumferential Cuff',
       subtitle: 'Zero-Misalignment Arterial Capture',
       summary: 'Eliminates inaccurate sensor misalignment. The pre-formed cylindrical structure wraps effortlessly around the arm for true 360° arterial coverage.',
       desc: 'Clinical studies demonstrate that incorrect cuff positioning is the #1 cause of inaccurate home blood pressure readings. Kingston’s 360° circumferential cuff features an anatomically pre-formed cylindrical core that distributes inflation pressure uniformly across the entire upper arm (22–42 cm), ensuring accurate arterial pulse capture regardless of minor rotational positioning.',
       image: '/images/1.png',
-      stat: '22–42 cm',
-      statLabel: 'Universal wide-range circumferential fit',
+
       keyPoints: [
         'Eliminates measurement inaccuracies caused by sensor rotation',
         'Effortless one-handed self-application for seniors & solitary users',
@@ -195,11 +189,10 @@ export default function TechnologySection() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
-                  activeTab === tab.id
-                    ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/30'
-                    : 'bg-[#100d28] text-slate-400 hover:text-white border border-white/10'
-                }`}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${activeTab === tab.id
+                  ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/30'
+                  : 'bg-[#100d28] text-slate-400 hover:text-white border border-white/10'
+                  }`}
               >
                 {tab.label}
               </button>
@@ -289,19 +282,8 @@ export default function TechnologySection() {
                       loading="lazy"
                     />
 
-                    {/* Category / Badge */}
-                    <div className="absolute top-3.5 left-3.5 z-10">
-                      <span className={`text-[10px] font-mono px-2.5 py-1 rounded-full border backdrop-blur-md shadow-lg ${tech.badgeColor} bg-[#0d0a20]/80`}>
-                        {tech.badge}
-                      </span>
-                    </div>
 
-                    {/* Floating Icon Badge */}
-                    <div className="absolute top-3.5 right-3.5 z-10">
-                      <div className="w-8 h-8 rounded-xl border border-white/15 backdrop-blur-md flex items-center justify-center shadow-lg bg-[#0d0a20]/80 text-violet-300">
-                        <Icon className="w-4 h-4" />
-                      </div>
-                    </div>
+
 
                     {/* Quick Metric Ribbon */}
                     <div className="absolute bottom-3 right-3 z-10 px-2.5 py-1 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 text-right">
