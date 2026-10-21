@@ -102,29 +102,49 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative overflow-hidden bg-[#070512] border-b border-violet-950/40 select-none min-h-[580px] sm:min-h-[620px] lg:min-h-[675px] flex flex-col justify-between"
+      className="relative overflow-hidden bg-[#070512] border-b border-violet-950/40 select-none lg:min-h-[675px] flex flex-col justify-between"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       aria-label="Kingston Instruments Hero Banner"
     >
-      {/* Background Banner Imagery Container */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Mobile Dedicated 3D Product Visual Stage */}
+      <div className="lg:hidden relative w-full h-[250px] sm:h-[320px] overflow-hidden bg-gradient-to-b from-[#070512] via-[#0b081e] to-[#070512] flex-shrink-0">
         {bannerSlides.map((slide, idx) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === current ? 'opacity-100 z-0' : 'opacity-0 -z-10 pointer-events-none'
-              }`}
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+              idx === current ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+            }`}
           >
-            {/* Banner Image positioned rightward to highlight 3D renders */}
             <img
               src={slide.image}
               alt={slide.title}
-              className={`   ${idx === current ? 'scale-100' : 'scale-105'
-                }`}
+              className="w-full h-full object-cover object-[78%_center]"
               loading={idx === 0 ? 'eager' : 'lazy'}
             />
+          </div>
+        ))}
+        {/* Soft bottom vignette into controls */}
+        <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#070512] to-transparent pointer-events-none z-20" />
+      </div>
 
-
+      {/* Desktop Background Banner Imagery Container (hidden on mobile) */}
+      <div className="hidden lg:block absolute inset-0 overflow-hidden pointer-events-none">
+        {bannerSlides.map((slide, idx) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              idx === current ? 'opacity-100 z-0' : 'opacity-0 -z-10 pointer-events-none'
+            }`}
+          >
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className={`w-full h-full object-cover object-right transition-transform duration-1000 ease-out ${
+                idx === current ? 'scale-100' : 'scale-105'
+              }`}
+              loading={idx === 0 ? 'eager' : 'lazy'}
+            />
           </div>
         ))}
       </div>
@@ -134,17 +154,14 @@ export default function HeroSection() {
       <div className="absolute bottom-10 right-1/4 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Main Content Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10 sm:pt-16 lg:pt-24 pb-12 w-full flex-1 flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-2 sm:pt-16 lg:pt-24 pb-4 sm:pb-12 w-full flex-1 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
 
           {/* Left Column: Slide Content */}
-          <div className="lg:col-span-7 xl:col-span-6 space-y-5 text-left">
+          <div className="lg:col-span-7 xl:col-span-6 space-y-3.5 sm:space-y-5 text-left">
 
-            {/* Animated Badge */}
-
-
-            {/* Title & Subtitle */}
-            <div className="space-y-2">
+            {/* Title & Subtitle - Hidden on phone (< sm) */}
+            <div className="space-y-2 hidden sm:block">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.08] text-white">
                 {activeSlide.title.includes('care.') ? (
                   <>
@@ -159,38 +176,40 @@ export default function HeroSection() {
               </p>
             </div>
 
-            {/* Description */}
-            <p className="text-slate-300/90 text-sm sm:text-base max-w-xl leading-relaxed font-light">
+            {/* Description - Hidden on phone (< sm) */}
+            <p className="hidden sm:block text-slate-300/90 text-sm sm:text-base max-w-xl leading-relaxed font-light">
               {activeSlide.description}
             </p>
 
-            {/* Action Buttons */}
-            <div className="pt-2 flex flex-wrap items-center gap-3.5">
+            {/* Professional Action Buttons Row */}
+            <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap sm:items-center sm:gap-3.5 w-full max-w-lg">
+              {/* Primary CTA */}
               <Link
                 to={activeSlide.primaryCta.href}
-                className="px-6 py-3.5 rounded-full bg-white text-[#090715] font-semibold text-sm hover:bg-violet-100 shadow-[0_0_30px_-5px_rgba(255,255,255,0.4)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 inline-flex items-center gap-2"
+                className="group relative h-11 sm:h-12 px-3 sm:px-6 rounded-xl sm:rounded-full bg-white hover:bg-slate-50 text-slate-950 font-semibold text-xs sm:text-sm tracking-tight shadow-[0_2px_14px_rgba(255,255,255,0.22)] hover:shadow-[0_4px_20px_rgba(255,255,255,0.4)] transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-1.5 sm:gap-2 text-center"
               >
-                <span>{activeSlide.primaryCta.label}</span>
-                <ArrowRight className="w-4 h-4" />
+                <span className="truncate">{activeSlide.primaryCta.label}</span>
+                <ArrowRight className="w-3.5 h-3.5 flex-shrink-0 text-slate-800 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Link>
 
+              {/* Secondary CTA */}
               <Link
                 to={activeSlide.secondaryCta.href}
-                className="px-6 py-3.5 rounded-full bg-violet-950/60 hover:bg-violet-900/60 text-violet-200 border border-violet-800/60 font-semibold text-sm transition-all inline-flex items-center gap-2 shadow-lg shadow-violet-950/40"
+                className="group relative h-11 sm:h-12 px-2.5 sm:px-6 rounded-xl sm:rounded-full bg-violet-950/70 hover:bg-violet-900/70 active:bg-violet-950 text-violet-100 border border-violet-700/50 hover:border-violet-500/60 font-semibold text-xs sm:text-sm tracking-tight backdrop-blur-md shadow-[0_2px_14px_rgba(124,58,237,0.2)] transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-1.5 sm:gap-2 text-center"
               >
-                <ShoppingBag className="w-4 h-4 text-violet-400" />
-                <span>{activeSlide.secondaryCta.label}</span>
+                <ShoppingBag className="w-3.5 h-3.5 flex-shrink-0 text-violet-400" />
+                <span className="truncate">{activeSlide.secondaryCta.label}</span>
               </Link>
             </div>
 
             {/* Dynamic Highlights Matrix */}
-            <div className="pt-5 border-t border-white/10 grid grid-cols-3 gap-3 sm:gap-4 max-w-lg">
+            <div className="pt-3 sm:pt-5 border-t border-white/10 grid grid-cols-3 gap-2 sm:gap-4 max-w-lg">
               {activeSlide.highlights.map((item, idx) => (
-                <div key={idx} className="bg-white/[0.02] border border-white/5 rounded-xl p-2.5">
-                  <div className="text-base sm:text-lg font-bold text-white tracking-tight">
+                <div key={idx} className="bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-xl p-2 sm:p-2.5 text-center sm:text-left flex flex-col justify-center">
+                  <div className="text-xs sm:text-lg font-bold text-white tracking-tight truncate">
                     {item.value}
                   </div>
-                  <div className="text-[11px] text-slate-400 font-mono mt-0.5 truncate">
+                  <div className="text-[10px] sm:text-[11px] text-slate-400 font-mono mt-0.5 truncate">
                     {item.label}
                   </div>
                 </div>
@@ -206,19 +225,20 @@ export default function HeroSection() {
       </div>
 
       {/* Bottom Bar: Tab Navigation & Slide Controls */}
-      <div className="relative z-20 bg-gradient-to-t from-[#05040d] via-[#070512]/90 to-transparent pt-6 pb-6 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="relative z-20 bg-gradient-to-t from-[#05040d] via-[#070512]/90 to-transparent pt-3 sm:pt-6 pb-4 sm:pb-6 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
 
           {/* Quick Slide Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 w-full sm:w-auto">
+          <div className="flex overflow-x-auto max-w-full items-center justify-start sm:justify-center gap-1.5 sm:gap-2 w-full sm:w-auto py-1 scrollbar-none">
             {bannerSlides.map((slide, idx) => (
               <button
                 key={slide.id}
                 onClick={() => goTo(idx)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-mono transition-all duration-300 flex items-center gap-2 border ${idx === current
-                  ? 'bg-violet-600/30 border-violet-400/60 text-white shadow-lg shadow-violet-900/40'
-                  : 'bg-white/[0.03] border-white/5 text-slate-400 hover:text-white hover:bg-white/[0.08]'
-                  }`}
+                className={`px-3 py-1.5 rounded-xl text-xs font-mono transition-all duration-300 flex items-center gap-1.5 border flex-shrink-0 ${
+                  idx === current
+                    ? 'bg-violet-600/30 border-violet-400/60 text-white shadow-lg shadow-violet-900/40'
+                    : 'bg-white/[0.03] border-white/5 text-slate-400 hover:text-white hover:bg-white/[0.08]'
+                }`}
               >
                 <span className={`w-1.5 h-1.5 rounded-full ${idx === current ? 'bg-violet-400' : 'bg-slate-600'}`} />
                 <span>{slide.tabLabel}</span>
