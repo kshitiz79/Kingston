@@ -11,8 +11,8 @@ const bannerSlides = [
     title: 'Precision with care.',
     subtitle: 'Know your numbers. Own your health.',
     description: 'Intelligent healthcare diagnostics engineered for clinical fidelity, intuitive ergonomics, and everyday confidence. Complete home monitoring portfolio backed by a 3-Year Canadian warranty.',
-    primaryCta: { label: 'Explore Device Range', href: '/products' },
-    secondaryCta: { label: 'Where to Buy (FB & Retail)', href: '/where-to-buy' },
+    primaryCta: { label: 'Explore Device Range', mobileLabel: 'Explore Range', href: '/products' },
+    secondaryCta: { label: 'Where to Buy (FB & Retail)', mobileLabel: 'Where to Buy', href: '/where-to-buy' },
     tabLabel: 'Portfolio Overview',
     highlights: [
       { value: '±3 mmHg', label: 'Clinical Accuracy' },
@@ -28,8 +28,8 @@ const bannerSlides = [
     title: 'Kingston Instruments A1',
     subtitle: 'Quality blood-pressure monitoring, now within reach.',
     description: 'Straightforward dual-user cardiovascular tracking with gentle MWI measurement while inflating. FDA 510(k) cleared with 120 stored readings, irregular-heartbeat alert, and wide-range cuff.',
-    primaryCta: { label: 'View A1 Monitor', href: '/products?category=bp' },
-    secondaryCta: { label: 'Order on Facebook ($39.99 CAD)', href: '/where-to-buy' },
+    primaryCta: { label: 'View A1 Monitor', mobileLabel: 'View A1', href: '/products?category=bp' },
+    secondaryCta: { label: 'Order on Facebook ($39.99 CAD)', mobileLabel: 'Order ($39.99)', href: '/where-to-buy' },
     tabLabel: 'A1 Dual-User',
     highlights: [
       { value: '$39.99 CAD', label: 'Accessible Price' },
@@ -45,8 +45,8 @@ const bannerSlides = [
     title: 'Kingston Instruments A2',
     subtitle: 'A clearer reading brings greater confidence.',
     description: 'Large, illuminated high-contrast LED display designed for effortless viewing by seniors and shared families. Dual 99-reading history, MWI inflation comfort, and USB-compatible power option.',
-    primaryCta: { label: 'View A2 Monitor', href: '/products?category=bp' },
-    secondaryCta: { label: 'Buy A2 ($54.99 CAD)', href: '/where-to-buy' },
+    primaryCta: { label: 'View A2 Monitor', mobileLabel: 'View A2', href: '/products?category=bp' },
+    secondaryCta: { label: 'Buy A2 ($54.99 CAD)', mobileLabel: 'Buy ($54.99)', href: '/where-to-buy' },
     tabLabel: 'A2 LED Display',
     highlights: [
       { value: '$54.99 CAD', label: 'Direct Special' },
@@ -62,13 +62,13 @@ const bannerSlides = [
     title: 'Kingston Instruments A13',
     subtitle: 'No tubes. No bulky monitor. No compromise.',
     description: 'Experience upper-arm blood pressure monitoring without the tubes. Streamlined cuff-integrated construction with rechargeable 3.7V lithium battery, modern LED display, and 240 dual-user storage.',
-    primaryCta: { label: 'View A13 Tubeless', href: '/products?category=bp' },
-    secondaryCta: { label: 'Buy A13 ($69.99 CAD)', href: '/where-to-buy' },
+    primaryCta: { label: 'View A13 Tubeless', mobileLabel: 'View A13', href: '/products?category=bp' },
+    secondaryCta: { label: 'Buy A13 ($69.99 CAD)', mobileLabel: 'Buy ($69.99)', href: '/where-to-buy' },
     tabLabel: 'A13 Tubeless',
     highlights: [
       { value: '$69.99 CAD', label: 'Flagship Price' },
       { value: 'Tubeless', label: 'Cuff-Integrated' },
-      { value: 'Rechargeable', label: '3.7V Lithium Cell' },
+      { value: 'Rechargeable', label: '3.7V Li-ion' },
     ],
   },
 ];
@@ -188,7 +188,8 @@ export default function HeroSection() {
                 to={activeSlide.primaryCta.href}
                 className="group relative h-11 sm:h-12 px-3 sm:px-6 rounded-xl sm:rounded-full bg-white hover:bg-slate-50 text-slate-950 font-semibold text-xs sm:text-sm tracking-tight shadow-[0_2px_14px_rgba(255,255,255,0.22)] hover:shadow-[0_4px_20px_rgba(255,255,255,0.4)] transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-1.5 sm:gap-2 text-center"
               >
-                <span className="truncate">{activeSlide.primaryCta.label}</span>
+                <span className="truncate hidden sm:inline">{activeSlide.primaryCta.label}</span>
+                <span className="truncate sm:hidden">{activeSlide.primaryCta.mobileLabel || activeSlide.primaryCta.label}</span>
                 <ArrowRight className="w-3.5 h-3.5 flex-shrink-0 text-slate-800 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Link>
 
@@ -198,7 +199,8 @@ export default function HeroSection() {
                 className="group relative h-11 sm:h-12 px-2.5 sm:px-6 rounded-xl sm:rounded-full bg-violet-950/70 hover:bg-violet-900/70 active:bg-violet-950 text-violet-100 border border-violet-700/50 hover:border-violet-500/60 font-semibold text-xs sm:text-sm tracking-tight backdrop-blur-md shadow-[0_2px_14px_rgba(124,58,237,0.2)] transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-1.5 sm:gap-2 text-center"
               >
                 <ShoppingBag className="w-3.5 h-3.5 flex-shrink-0 text-violet-400" />
-                <span className="truncate">{activeSlide.secondaryCta.label}</span>
+                <span className="truncate hidden sm:inline">{activeSlide.secondaryCta.label}</span>
+                <span className="truncate sm:hidden">{activeSlide.secondaryCta.mobileLabel || activeSlide.secondaryCta.label}</span>
               </Link>
             </div>
 
