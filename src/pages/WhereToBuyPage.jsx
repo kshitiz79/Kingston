@@ -58,13 +58,16 @@ export default function WhereToBuyPage() {
   // Update order product if URL param changes
   useEffect(() => {
     const pParam = searchParams.get('product');
-    if (pParam && productsData.some(p => p.id === pParam)) {
-      setOrderProduct(pParam);
+    if (pParam) {
+      const match = productsData.find(p => p.id === pParam || p.altId === pParam);
+      if (match) {
+        setOrderProduct(match.id);
+      }
     }
   }, [searchParams]);
 
   // Selected product object
-  const selectedProdObj = productsData.find(p => p.id === orderProduct) || productsData[0];
+  const selectedProdObj = productsData.find(p => p.id === orderProduct || p.altId === orderProduct) || productsData[0];
   const unitPrice = selectedProdObj.fbPrice || selectedProdObj.msrp;
   const discountMultiplier = appliedPromo ? 0.9 : 1.0;
   const subtotal = unitPrice * orderQuantity * discountMultiplier;

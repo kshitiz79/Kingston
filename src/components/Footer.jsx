@@ -154,7 +154,7 @@ export default function Footer() {
               <li>
                 <Link to="/products?category=thermo" className="hover:text-violet-300 transition-colors flex items-center gap-1 group">
                   <span>Infrared Thermometer</span>
-                  <span className="text-[10px] text-slate-500">V-12 Clinical</span>
+                  <span className="text-[10px] text-slate-500">FDIR-V11</span>
                 </Link>
               </li>
             </ul>

@@ -13,7 +13,7 @@ export default function CatalogueBanner() {
               Official Product Catalogue 2026
             </h3>
             <p className="text-xs text-slate-400 mt-1 max-w-xl">
-              Contains complete clinical device listings: FDBP-A1, FDBP-A2, FDBP-A13, HL-568 Glucose Meter, FDES-106 TENS + Heat, and V-12 Infrared Thermometer.
+              Contains complete clinical device listings: FDBP-A1, FDBP-A2, FDBP-A13, HL-568 Glucose Meter, FDES-106 TENS + Heat, and FDIR-V11 Infrared Thermometer.
             </p>
           </div>
 

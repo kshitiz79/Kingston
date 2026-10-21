@@ -70,7 +70,7 @@ export default function Header() {
     },
     {
       title: 'Infrared Thermometer',
-      desc: 'High Precision Contactless Clinical V-12',
+      desc: 'High Precision Contactless FDIR-V11',
       icon: Thermometer,
       href: '/products?category=thermo',
       color: 'text-rose-400 bg-rose-500/10'
