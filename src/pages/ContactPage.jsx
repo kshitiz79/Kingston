@@ -263,14 +263,14 @@ export default function ContactPage() {
       </section>
 
       {/* ── Map + Form ── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
-          {/* Map Embed Panel */}
-          <div className="sticky top-24">
+          {/* Map Embed Panel - Only sticky on desktop (lg:), normal flow on mobile/tablet */}
+          <div className="lg:sticky lg:top-28">
             <div className="rounded-2xl overflow-hidden border border-white/8 bg-white/[0.02]">
               {/* Map header */}
-              <div className="px-5 py-4 border-b border-white/8 flex items-center justify-between">
+              <div className="px-4 sm:px-5 py-3.5 sm:py-4 border-b border-white/8 flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-xl">{activeOff.flag}</span>
@@ -287,8 +287,8 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Google Maps iframe */}
-              <div className="relative w-full h-[380px] bg-[#0d0b1e]">
+              {/* Google Maps iframe - Responsive height for phone view */}
+              <div className="relative w-full h-[260px] sm:h-[320px] lg:h-[380px] bg-[#0d0b1e]">
                 <iframe
                   key={activeOffice}
                   title={`${activeOff.country} office map`}
@@ -302,7 +302,7 @@ export default function ContactPage() {
               </div>
 
               {/* Office selector tabs */}
-              <div className="flex gap-1 flex-wrap p-3 border-t border-white/8">
+              <div className="flex gap-1.5 flex-wrap p-2.5 sm:p-3 border-t border-white/8">
                 {offices.map((o, i) => (
                   <button
                     key={o.country}
@@ -343,7 +343,7 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Form */}
-          <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-6 md:p-8">
+          <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-4 sm:p-6 md:p-8">
             {!submitted ? (
               <>
                 <div className="mb-6">
