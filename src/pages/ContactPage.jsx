@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import {
   MapPin,
-  Phone,
   Mail,
   Send,
   CheckCircle,
   Globe,
   Building2,
-  Clock,
   ChevronDown,
   ExternalLink,
 } from 'lucide-react';
@@ -23,7 +21,7 @@ const offices = [
     accentColor: 'text-violet-400',
     borderColor: 'border-violet-800/40',
     address: '63 Meadowridge St, Kitchener, ON N2P 0E2, Canada',
-    phone: '+1 519-998-6325',
+    email: 'info@kingstoninstruments.com',
     mapUrl:
       'https://www.google.com/maps?q=63+Meadowridge+St,+Kitchener,+ON+N2P+0E2,+Canada',
   },
@@ -37,7 +35,7 @@ const offices = [
     accentColor: 'text-teal-400',
     borderColor: 'border-teal-800/40',
     address: '11G Bright Hill Drive, Thomson View, Singapore 579615',
-    phone: '+65 9127 6706',
+    email: 'info@kingstoninstruments.com',
     mapUrl:
       'https://www.google.com/maps?q=11G+Bright+Hill+Drive,+Thomson+View,+Singapore+579615',
   },
@@ -51,10 +49,10 @@ const offices = [
     accentColor: 'text-amber-400',
     borderColor: 'border-amber-800/40',
     address:
-      'No. 002, Shwe Than Lwin Condo, Bahan Township, Yangon, Myanmar 11201',
-    phone: '+95 9430 40374 / +95 9798 45393',
+      'Room I+J, 2nd Floor, The Atrium, Upper Pansodan Rd, Yangon 11222, Myanmar (Burma)',
+    email: 'info@kingstoninstruments.com',
     mapUrl:
-      'https://www.google.com/maps?q=Bahan+Township,+Yangon,+Myanmar',
+      'https://www.google.com/maps?q=The+Atrium,+Upper+Pansodan+Rd,+Yangon+11222,+Myanmar',
   },
   {
     country: 'Cambodia',
@@ -67,7 +65,7 @@ const offices = [
     borderColor: 'border-rose-800/40',
     address:
       '#1911–1912, 19th Floor, The Peak Offices (Shangri-La Hotel Tower), 06 Samdech Hun Sen Street, Phnom Penh 120101, Cambodia',
-    phone: null,
+    email: 'info@kingstoninstruments.com',
     mapUrl:
       'https://www.google.com/maps?q=The+Peak+Offices,+Phnom+Penh,+Cambodia',
   },
@@ -81,7 +79,7 @@ const offices = [
     accentColor: 'text-orange-400',
     borderColor: 'border-orange-800/40',
     address: '105, Sagar Complex, Pitampura, New Delhi 110034, India',
-    phone: '+91 98713 3044',
+    email: 'info@kingstoninstruments.com',
     mapUrl:
       'https://www.google.com/maps?q=105+Sagar+Complex,+Pitampura,+New+Delhi+110034',
   },
@@ -95,7 +93,7 @@ const offices = [
     accentColor: 'text-sky-400',
     borderColor: 'border-sky-800/40',
     address: '24, Birgunj 44300, Nepal',
-    phone: null,
+    email: 'info@kingstoninstruments.com',
     mapUrl: 'https://www.google.com/maps?q=Birgunj+44300,+Nepal',
   },
 ];
@@ -115,7 +113,6 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
     country: '',
     inquiryType: '',
     message: '',
@@ -133,7 +130,6 @@ export default function ContactPage() {
     setSubmitted(true);
   };
 
-  const headOffice = offices[0];
   const activeOff = offices[activeOffice];
 
   return (
@@ -224,39 +220,46 @@ export default function ContactPage() {
                   <MapPin
                     className={`w-4 h-4 ${office.accentColor} flex-shrink-0 mt-0.5`}
                   />
-                  <span className="leading-relaxed">{office.address}</span>
+                  <span className="leading-relaxed text-xs sm:text-sm">{office.address}</span>
                 </div>
 
-                {office.phone ? (
-                  <div className="flex items-center gap-2.5 text-slate-300">
-                    <Phone className={`w-4 h-4 ${office.accentColor} flex-shrink-0`} />
-                    <a
-                      href={`tel:${office.phone.split('/')[0].trim()}`}
-                      onClick={(e) => e.stopPropagation()}
-                      className="hover:text-white transition-colors"
-                    >
-                      {office.phone}
-                    </a>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-2.5 text-slate-500 text-xs italic">
-                    <Phone className="w-4 h-4 flex-shrink-0" />
-                    <span>Contact via form</span>
-                  </div>
-                )}
+                <div className="flex items-center gap-2.5 text-slate-300">
+                  <Mail className={`w-4 h-4 ${office.accentColor} flex-shrink-0`} />
+                  <a
+                    href={`mailto:${office.email}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="hover:text-white transition-colors text-xs sm:text-sm font-mono truncate"
+                  >
+                    {office.email}
+                  </a>
+                </div>
               </div>
 
-              {/* Map link */}
-              <a
-                href={office.mapUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className={`inline-flex items-center gap-1.5 mt-4 text-xs font-medium ${office.accentColor} hover:opacity-80 transition-opacity`}
-              >
-                <ExternalLink className="w-3.5 h-3.5" />
-                View on Map
-              </a>
+              {/* Bottom Actions: Map & Form Enquiry */}
+              <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/5">
+                <a
+                  href={office.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className={`inline-flex items-center gap-1.5 text-xs font-medium ${office.accentColor} hover:opacity-80 transition-opacity`}
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  View on Map
+                </a>
+
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors group/btn"
+                >
+                  <span>Form Enquiry</span>
+                  <Send className="w-3 h-3 text-slate-500 group-hover/btn:text-violet-300 transition-colors" />
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -329,9 +332,9 @@ export default function ContactPage() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 <div className="flex items-center gap-2 text-slate-300">
-                  <Phone className="w-4 h-4 text-violet-400 flex-shrink-0" />
-                  <a href="tel:+15199986325" className="hover:text-white transition-colors">
-                    +1 519-998-6325
+                  <Mail className="w-4 h-4 text-violet-400 flex-shrink-0" />
+                  <a href="mailto:info@kingstoninstruments.com" className="hover:text-white transition-colors text-xs font-mono">
+                    info@kingstoninstruments.com
                   </a>
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
@@ -339,11 +342,22 @@ export default function ContactPage() {
                   <span className="text-xs leading-relaxed">Kitchener, ON, Canada</span>
                 </div>
               </div>
+              <div className="mt-3 pt-3 border-t border-violet-800/20 flex items-center justify-between text-xs text-slate-400">
+                <span>Inquiries: Email & Online Form only</span>
+                <button
+                  type="button"
+                  onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-violet-300 hover:text-white transition-colors font-medium inline-flex items-center gap-1"
+                >
+                  <span>Fill Form Below</span>
+                  <span>↓</span>
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="rounded-2xl border border-white/8 bg-white/[0.02] p-4 sm:p-6 md:p-8">
+          <div id="contact-form" className="rounded-2xl border border-white/8 bg-white/[0.02] p-4 sm:p-6 md:p-8 scroll-mt-28">
             {!submitted ? (
               <>
                 <div className="mb-6">
@@ -352,7 +366,7 @@ export default function ContactPage() {
                   </h2>
                   <p className="text-sm text-slate-400">
                     We'll get back to you within 1–2 business days from our
-                    nearest regional office.
+                    nearest regional office. Inquiries accepted via email and online form.
                   </p>
                 </div>
 
@@ -385,24 +399,13 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  {/* Phone + Country */}
+                  {/* Country + Inquiry type */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <FormField
-                      label="Phone (optional)"
-                      name="phone"
-                      type="tel"
-                      placeholder="+1 (555) 000-0000"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      onFocus={() => setFocusedField('phone')}
-                      onBlur={() => setFocusedField(null)}
-                      focused={focusedField === 'phone'}
-                    />
-                    <FormField
-                      label="Country"
+                      label="Country / Region"
                       name="country"
                       type="text"
-                      placeholder="Your country"
+                      placeholder="e.g. Canada, Myanmar, Singapore..."
                       value={formData.country}
                       onChange={handleChange}
                       onFocus={() => setFocusedField('country')}
@@ -410,35 +413,34 @@ export default function ContactPage() {
                       focused={focusedField === 'country'}
                       required
                     />
-                  </div>
 
-                  {/* Inquiry type */}
-                  <div>
-                    <label className="block text-xs font-medium text-slate-300 mb-1.5">
-                      Inquiry Type <span className="text-violet-400">*</span>
-                    </label>
-                    <div className="relative">
-                      <select
-                        name="inquiryType"
-                        value={formData.inquiryType}
-                        onChange={handleChange}
-                        onFocus={() => setFocusedField('inquiryType')}
-                        onBlur={() => setFocusedField(null)}
-                        required
-                        className={`w-full appearance-none bg-[#0e0c1e] text-sm text-slate-200 px-4 py-3 rounded-xl border outline-none transition-all pr-10
-                          ${focusedField === 'inquiryType' ? 'border-violet-500/60 shadow-[0_0_0_3px_rgba(139,92,246,0.12)]' : 'border-white/10 hover:border-white/20'}
-                        `}
-                      >
-                        <option value="" disabled className="text-slate-500">
-                          Select inquiry type
-                        </option>
-                        {inquiryTypes.map((t) => (
-                          <option key={t} value={t} className="bg-[#0e0c1e]">
-                            {t}
+                    <div>
+                      <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                        Inquiry Type <span className="text-violet-400">*</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          name="inquiryType"
+                          value={formData.inquiryType}
+                          onChange={handleChange}
+                          onFocus={() => setFocusedField('inquiryType')}
+                          onBlur={() => setFocusedField(null)}
+                          required
+                          className={`w-full appearance-none bg-[#0e0c1e] text-sm text-slate-200 px-4 py-3 rounded-xl border outline-none transition-all pr-10
+                            ${focusedField === 'inquiryType' ? 'border-violet-500/60 shadow-[0_0_0_3px_rgba(139,92,246,0.12)]' : 'border-white/10 hover:border-white/20'}
+                          `}
+                        >
+                          <option value="" disabled className="text-slate-500">
+                            Select inquiry type
                           </option>
-                        ))}
-                      </select>
-                      <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                          {inquiryTypes.map((t) => (
+                            <option key={t} value={t} className="bg-[#0e0c1e]">
+                              {t}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                      </div>
                     </div>
                   </div>
 
@@ -488,7 +490,6 @@ export default function ContactPage() {
                     setFormData({
                       name: '',
                       email: '',
-                      phone: '',
                       country: '',
                       inquiryType: '',
                       message: '',

@@ -5,6 +5,7 @@ import {
   Store,
   MapPin,
   Phone,
+  Mail,
   ExternalLink,
   ShieldCheck,
   Truck,
@@ -900,12 +901,21 @@ export default function WhereToBuyPage() {
                         <span>{ret.address}, {ret.city}, {ret.prov} {ret.postal}</span>
                       </div>
 
-                      <div className="flex items-center gap-2">
-                        <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                        <a href={`tel:${ret.phone}`} className="hover:text-white transition-colors">
-                          {ret.phone}
-                        </a>
-                      </div>
+                      {ret.phone ? (
+                        <div className="flex items-center gap-2">
+                          <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                          <a href={`tel:${ret.phone}`} className="hover:text-white transition-colors">
+                            {ret.phone}
+                          </a>
+                        </div>
+                      ) : ret.email ? (
+                        <div className="flex items-center gap-2">
+                          <Mail className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                          <a href={`mailto:${ret.email}`} className="hover:text-white transition-colors">
+                            {ret.email}
+                          </a>
+                        </div>
+                      ) : null}
 
                       {ret.hours && (
                         <div className="flex items-start gap-2 text-slate-400 text-[11px]">
@@ -948,13 +958,23 @@ export default function WhereToBuyPage() {
                       <ExternalLink className="w-3 h-3" />
                     </a>
 
-                    <a
-                      href={`tel:${ret.phone}`}
-                      className="py-2 px-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-medium border border-white/10 transition-colors flex items-center gap-1.5"
-                    >
-                      <Phone className="w-3.5 h-3.5" />
-                      <span>Call</span>
-                    </a>
+                    {ret.phone ? (
+                      <a
+                        href={`tel:${ret.phone}`}
+                        className="py-2 px-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-medium border border-white/10 transition-colors flex items-center gap-1.5"
+                      >
+                        <Phone className="w-3.5 h-3.5" />
+                        <span>Call</span>
+                      </a>
+                    ) : ret.email ? (
+                      <a
+                        href={`mailto:${ret.email}`}
+                        className="py-2 px-3.5 rounded-xl bg-violet-600/20 hover:bg-violet-600/30 text-violet-200 text-xs font-medium border border-violet-500/20 transition-colors flex items-center gap-1.5"
+                      >
+                        <Mail className="w-3.5 h-3.5" />
+                        <span>Email</span>
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               ))}
@@ -1009,11 +1029,11 @@ export default function WhereToBuyPage() {
                 </Link>
 
                 <a
-                  href="tel:+15199986325"
+                  href="mailto:info@kingstoninstruments.com"
                   className="px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 text-xs font-medium transition-colors flex items-center gap-2"
                 >
-                  <Phone className="w-4 h-4 text-violet-400" />
-                  <span>Call Kitchener B2B Desk (+1 519-998-6325)</span>
+                  <Mail className="w-4 h-4 text-violet-400" />
+                  <span>Email Kitchener B2B Desk (info@kingstoninstruments.com)</span>
                 </a>
               </div>
             </div>

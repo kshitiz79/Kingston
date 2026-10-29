@@ -34,7 +34,9 @@ export default function HealthToolsPage() {
               <BookOpen className="w-3.5 h-3.5" />
               <span>How to Read BP & Glucose Guide</span>
             </a>
+     
 
+     
             <Link
               to="/products"
               className="px-5 py-2.5 rounded-full bg-white text-[#090715] font-semibold text-xs hover:bg-violet-100 transition-colors flex items-center gap-1.5"

@@ -5,7 +5,6 @@ import {
   ShieldCheck, 
   MapPin, 
   Mail, 
-  Phone, 
   ArrowUpRight, 
   ExternalLink,
   Activity,

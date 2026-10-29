@@ -22,7 +22,7 @@ const bannerSlides = [
   },
   {
     id: 'a1',
-    image: '/banner/2.png',
+    image: '/banner/2.png',    
     badge: 'FDA 510(k) Cleared • Accessible Care',
     badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
     title: 'Kingston Instruments A1',

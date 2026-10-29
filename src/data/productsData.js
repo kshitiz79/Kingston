@@ -306,7 +306,7 @@ export const retailersData = [
     prov: 'ON',
     postal: 'N2P 0E2',
     address: '63 Meadowridge St',
-    phone: '+1 519-998-6325',
+    email: 'info@kingstoninstruments.com',
     hours: 'Mon - Fri: 8:30 AM - 5:30 PM',
     inStock: ['FDBP-A2', 'FDBP-A1', 'FDBP-A13', 'HL-568', 'FDES-106', 'FDIR-V11'],
     status: 'In Stock (Direct Depot)',
